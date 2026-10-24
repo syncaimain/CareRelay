@@ -27,6 +27,7 @@ The user selected `syncaimain/CareRelay`, confirmed public visibility, and deleg
 - [x] Implement the user-selected Temporal integration with persistent local service, transactional dispatch, retrying Activities and attempt-checked idempotent commits.
 - [x] Verify actual API/worker crash recovery and real-model retry, preserve private-job access and human review, and inspect actual Temporal workflow evidence.
 - [x] Verify 28 deterministic tests, TypeScript, production build and the genuine browser journey after integrating Temporal.
+- [x] Publish the Temporal source/evidence on `main`, verify the actual public recovery screenshot and reproducibility assets, and add the sixth screenshot to the revised article. See `docs/temporal-publication-verification.json`.
 - [ ] User manually updates the existing DEV post with the new Temporal evidence and Best Use of Temporal category. The original DEV verification report predates this revision.
 
 Current status: application and Temporal integration verified; revised article ready for user review and manual DEV update. There is no hosted application deployment. No account or article was automatically selected or published.

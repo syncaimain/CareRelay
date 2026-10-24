@@ -9,7 +9,7 @@
 - Voiceover: `demo/assets/audio/kokoro_voiceover.wav`.
 - Captions: `demo/assets/audio/subtitles.srt`; also embedded as an English subtitle track.
 - Verification: `docs/final-video-verification.json`.
-- Article: `docs/DEV_SUBMISSION.md`, complete Markdown with real repository/video links and five verified screenshots. The user manually published it at https://dev.to/faris-khan/everyone-wanted-to-help-nobody-had-the-whole-plan-2pjk.
+- Article: `docs/DEV_SUBMISSION.md`, revised Markdown with real repository/video links and six verified screenshots. The user published the original version at https://dev.to/faris-khan/everyone-wanted-to-help-nobody-had-the-whole-plan-2pjk; the Temporal revision needs a manual update there.
 
 ## GitHub checkpoint
 

@@ -1,0 +1,38 @@
+{
+  "asset_commit": "4830663ee40fab66632ae154950ad174ad9897fb",
+  "repository": "https://github.com/syncaimain/CareRelay",
+  "links": [
+    {
+      "path": "demo/assets/screenshots/08-temporal-recovery.png",
+      "url": "https://raw.githubusercontent.com/syncaimain/CareRelay/4830663ee40fab66632ae154950ad174ad9897fb/demo/assets/screenshots/08-temporal-recovery.png",
+      "status": 200,
+      "matches_local": true
+    },
+    {
+      "path": "demo/assets/screenshots/09-durable-import.png",
+      "url": "https://raw.githubusercontent.com/syncaimain/CareRelay/4830663ee40fab66632ae154950ad174ad9897fb/demo/assets/screenshots/09-durable-import.png",
+      "status": 200,
+      "matches_local": true
+    },
+    {
+      "path": "demo/assets/screenshots/10-temporal-suggestions.png",
+      "url": "https://raw.githubusercontent.com/syncaimain/CareRelay/4830663ee40fab66632ae154950ad174ad9897fb/demo/assets/screenshots/10-temporal-suggestions.png",
+      "status": 200,
+      "matches_local": true
+    },
+    {
+      "path": "docs/temporal-verification.json",
+      "url": "https://raw.githubusercontent.com/syncaimain/CareRelay/4830663ee40fab66632ae154950ad174ad9897fb/docs/temporal-verification.json",
+      "status": 200,
+      "matches_local": true
+    },
+    {
+      "path": "scripts/verify_temporal.py",
+      "url": "https://raw.githubusercontent.com/syncaimain/CareRelay/4830663ee40fab66632ae154950ad174ad9897fb/scripts/verify_temporal.py",
+      "status": 200,
+      "matches_local": true
+    }
+  ],
+  "partner_category": "Best Use of Temporal",
+  "existing_dev_post_requires_manual_update": true
+}
