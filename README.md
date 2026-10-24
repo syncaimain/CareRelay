@@ -4,6 +4,10 @@
 
 CareRelay is a functional prototype for **fictional care circles on a trusted local machine**. It is organizational software, with no diagnosis, dosing or treatment guidance. Demo inputs are explicitly labeled synthetic. It never sends messages externally.
 
+![CareRelay overview with a fictional circle and approved plan](demo/assets/screenshots/01-overview.png)
+
+[Watch the narrated demo](https://youtu.be/ylEdw_ICXTU) · [Read the implementation and evaluation story](docs/DEV_SUBMISSION.md)
+
 ## Run locally
 
 Requirements: Python 3.12+, Node 22+, and Ollama. The default model is **Ministral 3 14B**, chosen by the user instead of the original Qwen default. Its Ollama download is approximately 9.1 GB; runtime needs additional memory. The inspected development machine has an RTX 4090 with 24 GB VRAM. Upstream model license: [Apache 2.0](https://ollama.com/library/ministral-3).
@@ -77,12 +81,10 @@ Model extractions can still contain factual errors even when a quote is genuine.
 - [Implementation plan](docs/IMPLEMENTATION_PLAN.md)
 - [Demo script](docs/DEMO_SCRIPT.md)
 - [Publishing checklist](docs/PUBLISHING_CHECKLIST.md)
-- [Submission working draft](docs/DEV_SUBMISSION.md)
+- [Submission article for review](docs/DEV_SUBMISSION.md)
 
 An actual **118.8-second, 1920×1080 silent demo** is available at `demo/assets/video/demo_silent.mp4`. Run the recording again with `node --experimental-strip-types demo/record_demo.ts` (Node 22+) against the running servers. The script uses real local inference and checks consent and rescheduling history.
 
 The final narrated video is `demo/assets/video/final_demo.mp4` (1920×1080, 108.08 seconds), with genuine Kokoro-82M `am_fenrir` narration and an English subtitle track. The voiceover WAV, narration text and separate `.srt` captions are under `demo/assets/audio/`. Phrase timing is aligned to independently synthesized speech segments, not word-for-word forced alignment.
 
-Watch the [narrated CareRelay demonstration on YouTube](https://youtu.be/ylEdw_ICXTU).
-
-GitHub destination is `syncaimain/CareRelay`, with public visibility confirmed by the user; matching-account authentication is pending. The local Git repository is initialized; no external repository, hosted deployment or DEV publication has been created. The external publication checkpoints in `BUILD_PROMPT.md` remain in effect.
+The source and demonstration assets are public at [syncaimain/CareRelay](https://github.com/syncaimain/CareRelay), on `main`. The user-uploaded YouTube demonstration is linked above. There is no hosted application deployment; the DEV article is prepared for user review and has not been published automatically.

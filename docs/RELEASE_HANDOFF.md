@@ -8,27 +8,28 @@
 - Voiceover: `demo/assets/audio/kokoro_voiceover.wav`.
 - Captions: `demo/assets/audio/subtitles.srt`; also embedded as an English subtitle track.
 - Verification: `docs/final-video-verification.json`.
-- Article: `docs/DEV_SUBMISSION.md`, a pending 1,600+ word draft; not ready to publish without genuine public links and review.
+- Article: `docs/DEV_SUBMISSION.md`, complete Markdown with real repository/video links and five verified screenshots; ready for user review.
 
 ## GitHub checkpoint
 
-Destination is `syncaimain/CareRelay`; the user confirmed public visibility. The local Git repository is initialized on `main`. No external repository has been created or pushed. An authenticated lookup is required to check whether a private destination already exists.
+Public repository: https://github.com/syncaimain/CareRelay. Authentication was verified as the explicitly selected `syncaimain` account, and an authenticated lookup confirmed the destination did not already exist before creation. The application and demonstration assets are pushed on `main`.
 
-The portable official GitHub CLI is installed at `.tools/gh/bin/gh.exe`. The downloaded v2.103.2 archive passed its upstream SHA-256 checksum. The existing default GitHub account does not match the requested destination and has not been switched.
+The portable official GitHub CLI is installed at `.tools/gh/bin/gh.exe`. The downloaded v2.103.2 archive passed its upstream SHA-256 checksum. Task authentication uses `.cache/github-auth` without changing the default CLI account or global Git credentials.
 
-Use a task-specific configuration when authenticating so another agent's default account stays unchanged:
+For future repository operations, use the task-specific configuration:
 
 ```powershell
 cd G:\Hacktoberfest-2026-Week3\04-CareRelay
 $env:GH_CONFIG_DIR = Join-Path (Get-Location) '.cache/github-auth'
-.\.tools\gh\bin\gh.exe auth login --hostname github.com --git-protocol https --web
 .\.tools\gh\bin\gh.exe api user --jq .login
 ```
 
-Choose **syncaimain** during browser authentication. The final command must return `syncaimain` before any repository operation. Do not paste tokens into chat. `.cache/`, `.tools/`, local environments, runtime databases and `.env*` files are ignored; `.env.example` remains publishable. Repeat the source scan before pushing.
+The final command must return `syncaimain`. `.cache/`, `.tools/`, local environments, runtime databases and `.env*` files are ignored; `.env.example` remains publishable. The pre-push scan found no credential patterns in 65 text files. Git author identity is configured only in this repository, using the verified account's GitHub noreply address.
+
+The five article screenshots are pinned to asset commit `d4b6c28039f7481b8912cf414ef8ef28afadf011`. Every public raw URL returned HTTP 200 with PNG content identical to the local file; see `docs/github-publication-verification.json`.
 
 ## YouTube and article checkpoint
 
 The user uploaded the demonstration to https://youtu.be/ylEdw_ICXTU. YouTube's public oEmbed endpoint verified the title “Care Relay” and author “Syncai”; the canonical watch page also returned successfully. Upload the separate SRT as captions if needed; the MP4's embedded subtitle track is not a guarantee that YouTube will import captions automatically.
 
-The verified YouTube embed is in the article. After the authenticated repository push, verify actual screenshot URLs and replace the draft's local asset references with stable links. Display the entire final article for user review. Do not publish the DEV article automatically.
+The verified YouTube embed and screenshot links are in the article. Display the entire Markdown for user review before manual DEV publication. User article review remains pending; no DEV post has been published automatically. The application remains a local prototype, with no hosted application deployment.

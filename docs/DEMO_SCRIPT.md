@@ -32,4 +32,4 @@ ffmpeg -i $recordingFile -c:v libx264 -threads 4 -crf 20 -pix_fmt yuv420p -movfl
 
 The existing MP4 passed a full FFmpeg decode. `docs/demo-recording.json` preserves the actual UI event timeline and verified final state. Failed development takes remain ignored and are not publication assets.
 
-The narration script, voiceover and SRT are under `demo/assets/audio/`. `docs/final-video-verification.json` records final decoding and stream checks. The YouTube embed is in the DEV article; authenticated GitHub publication, hosted screenshot links and user article review remain pending.
+The narration script, voiceover and SRT are under `demo/assets/audio/`. `docs/final-video-verification.json` records final decoding and stream checks. The YouTube embed and verified GitHub-hosted screenshots are in the DEV article. Source and assets are public at https://github.com/syncaimain/CareRelay; user article review remains pending.

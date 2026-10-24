@@ -1,9 +1,3 @@
-<!-- WORKING DRAFT — NOT READY TO PUBLISH.
-Missing: GitHub authentication and verified push,
-verified public screenshot links and article review.
-No repository/video links or results are invented here.
--->
-
 Title: Everyone Wanted to Help. Nobody Had the Whole Plan.
 
 Tags: devchallenge, hf26challenge, ai, opensource
@@ -18,6 +12,8 @@ These are fictional people in CareRelay's synthetic demonstration. The burden th
 
 CareRelay is a local family coordination prototype. It turns pasted messages into suggested appointments, transport, errands, pickups and confirmation tasks. A person reviews the evidence and approves each item before it reaches the shared plan. A caregiver then accepts their own responsibilities. Those are two different decisions, and the application keeps them separate.
 
+![CareRelay overview showing the fictional circle and its approved coordination plan](https://raw.githubusercontent.com/syncaimain/CareRelay/d4b6c28039f7481b8912cf414ef8ef28afadf011/demo/assets/screenshots/01-overview.png)
+
 ## Demo
 
 {% youtube ylEdw_ICXTU %}
@@ -28,13 +24,15 @@ The demonstration was recorded at 1920×1080 with real local model inference and
 
 The recorded journey follows a clinic appointment change, a proposed driver whose work shift overlaps the journey, and an unassigned return ride. Robin explicitly accepts her own library pickup. The original appointment becomes cancelled when its replacement is approved. The final handoff keeps that accepted commitment separate from the unresolved replacement appointment and its transport question.
 
-Actual screenshots are saved locally as `01-overview.png`, `02-source.png`, `03-evidence.png`, `04-board.png`, `05-reschedule.png`, `06-handoff.png` and `07-calendar.png` under `demo/assets/screenshots/`. Public screenshot embeds will be added only after an authorized repository push provides real stable URLs.
+![Synthetic conversation in the import inbox, with an explicit reference time and visibility choice](https://raw.githubusercontent.com/syncaimain/CareRelay/d4b6c28039f7481b8912cf414ef8ef28afadf011/demo/assets/screenshots/02-source.png)
+
+![Human-approved handoff separating accepted commitments from unresolved responsibilities](https://raw.githubusercontent.com/syncaimain/CareRelay/d4b6c28039f7481b8912cf414ef8ef28afadf011/demo/assets/screenshots/06-handoff.png)
 
 ## Code
 
-The local implementation uses Next.js, TypeScript, Tailwind, a shadcn-style button component, FastAPI, Pydantic and SQLite. A repository link will be included only after the user chooses the destination and authorizes publication.
+[CareRelay source code, setup instructions and demonstration assets](https://github.com/syncaimain/CareRelay)
 
-The selected destination is the public repository `syncaimain/CareRelay`; authenticated access and the actual repository push are still pending. This working draft is not a published submission.
+The MIT-licensed application uses Next.js, TypeScript, Tailwind, a shadcn-style button component, FastAPI, Pydantic and SQLite. The repository includes the labeled synthetic dataset, evaluation reports, recording script, screenshots and narrated video. Model weights retain their upstream licenses. The README documents manual local startup; the optional Docker Compose configuration has not been verified.
 
 ## How I Built It
 
@@ -44,7 +42,11 @@ A typed JSON schema constrains the response, but valid JSON alone is insufficien
 
 The review queue is deliberately central. The reviewer can correct the title, date, location, proposed owner and unresolved details. Approval places an item on the plan. Acceptance is a separate action reserved for the proposed caregiver, or a volunteer when the task is unassigned.
 
+![Review queue showing model suggestions beside source evidence and human review controls](https://raw.githubusercontent.com/syncaimain/CareRelay/d4b6c28039f7481b8912cf414ef8ef28afadf011/demo/assets/screenshots/03-evidence.png)
+
 That distinction changes the familiar task-board interaction. A task can be perfectly understandable and approved while still having nobody committed to doing it. CareRelay displays that gap instead of filling it with a reassuring name. Unclaimed transport gets an explicit warning; the calendar is a view of the approved plan rather than a second independent source of truth.
+
+![Responsibility board keeping proposed assignments and unclaimed transport visible](https://raw.githubusercontent.com/syncaimain/CareRelay/d4b6c28039f7481b8912cf414ef8ef28afadf011/demo/assets/screenshots/04-board.png)
 
 Availability is intentionally modest. Caregivers record windows when they are unavailable. The conflict check compares proposed tasks against those windows and against each other, using a documented one-hour planning window. It does not pretend to know travel times, appointment duration or whether two nearby errands are realistically compatible. A warning is a reason to check with someone, not a scheduling verdict.
 
@@ -60,7 +62,7 @@ The implementation stays small enough to run locally: parameterized SQLite queri
 
 The current prototype is intended for fictional data on a trusted local machine. It does not yet provide production identity verification or encrypted storage. The demo's profile switcher exists to demonstrate consent and permission boundaries, not to claim independent authentication for real households.
 
-The interface was revised after visual review: white and slate surfaces, teal accents, sans-serif headings, larger controls, and clearer secondary text. A full production build and a genuine Chromium journey pass. Desktop and mobile screenshots were inspected at 1440×1000 and 390×844, with no detected horizontal mobile overflow or browser page errors. The browser runs in its own process so unrelated projects and browser tabs stay untouched.
+The interface was revised after visual review: white and slate surfaces, teal accents, sans-serif headings, larger controls, and clearer secondary text. All 23 deterministic backend/evaluation tests, TypeScript checking, a full production build and a genuine Chromium journey pass. Desktop and mobile screenshots were inspected at 1440×1000 and 390×844, with no detected horizontal mobile overflow or browser page errors.
 
 Measurement also changed the implementation. The initial 32-message synthetic evaluation scored 77.8% strict category precision and recall. Confirmations were sometimes classified as appointments; cancellations sometimes changed the task category; the model sometimes assumed UTC even though the source reference carried a local timezone.
 
@@ -86,6 +88,8 @@ The intended payoff is fewer rounds of reconstructing the same conversation. Imp
 
 No household time savings have been measured. The included examples are synthetic demonstrations, not live-family trials or evidence of improved health outcomes.
 
+Alex still has to ask whether Maya can drive. Robin still has to decide whether she can help. CareRelay leaves those decisions with them. The smaller relief is having one place to see which questions still need an answer, without asking everyone to reconstruct the conversation again.
+
 ## Prize Categories
 
-The official challenge page was checked on October 24, 2026. The post is intended for the overall Week 3 challenge; no partner prize category is claimed because no qualifying partner integration is implemented. Gemma is excluded. The public repository, hosted screenshot links and article review are still pending in this working draft.
+I am entering the overall Week 3 challenge. No partner prize category is claimed because no qualifying partner integration is implemented.

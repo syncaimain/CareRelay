@@ -1,0 +1,48 @@
+{
+  "repository": "https://github.com/syncaimain/CareRelay",
+  "public": true,
+  "default_branch": "main",
+  "asset_commit": "d4b6c28039f7481b8912cf414ef8ef28afadf011",
+  "screenshots": [
+    {
+      "name": "01-overview.png",
+      "url": "https://raw.githubusercontent.com/syncaimain/CareRelay/d4b6c28039f7481b8912cf414ef8ef28afadf011/demo/assets/screenshots/01-overview.png",
+      "status": 200,
+      "content_type": "image/png",
+      "sha256": "cb78575c20c15559fd703ea9d6087d40c49615c364ab6c85d26194bbe079397c",
+      "matches_local": true
+    },
+    {
+      "name": "02-source.png",
+      "url": "https://raw.githubusercontent.com/syncaimain/CareRelay/d4b6c28039f7481b8912cf414ef8ef28afadf011/demo/assets/screenshots/02-source.png",
+      "status": 200,
+      "content_type": "image/png",
+      "sha256": "a8ae474a3ef00cc4e8e1cfca38effcf563185305a9d6fa5f2142eb60eeab20d5",
+      "matches_local": true
+    },
+    {
+      "name": "03-evidence.png",
+      "url": "https://raw.githubusercontent.com/syncaimain/CareRelay/d4b6c28039f7481b8912cf414ef8ef28afadf011/demo/assets/screenshots/03-evidence.png",
+      "status": 200,
+      "content_type": "image/png",
+      "sha256": "4e6281cc1a5b7619526e0051b4679f2c8cccfbb6ccee6d2a9aa05419a0f67654",
+      "matches_local": true
+    },
+    {
+      "name": "04-board.png",
+      "url": "https://raw.githubusercontent.com/syncaimain/CareRelay/d4b6c28039f7481b8912cf414ef8ef28afadf011/demo/assets/screenshots/04-board.png",
+      "status": 200,
+      "content_type": "image/png",
+      "sha256": "8164571e1625d79f1c70be26425879712c1b9587af1549f695a7e111789eafca",
+      "matches_local": true
+    },
+    {
+      "name": "06-handoff.png",
+      "url": "https://raw.githubusercontent.com/syncaimain/CareRelay/d4b6c28039f7481b8912cf414ef8ef28afadf011/demo/assets/screenshots/06-handoff.png",
+      "status": 200,
+      "content_type": "image/png",
+      "sha256": "6f9223bb763874afd57f2695e220868656997ee64977d5f5bb7119ace3edfd9f",
+      "matches_local": true
+    }
+  ]
+}
