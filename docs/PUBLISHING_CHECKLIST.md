@@ -21,6 +21,7 @@ The user selected `syncaimain/CareRelay`, confirmed public visibility, and deleg
 - [x] Validate the supplied YouTube URL (`https://youtu.be/ylEdw_ICXTU`, “Care Relay” by Syncai) through public oEmbed and a successful canonical watch-page response; add the real video ID to the DEV embed.
 - [x] Verify the official Week 3 prompt and required tags (`devchallenge`, `hf26challenge`); overall submission only, with no unsupported partner category claims and no Gemma.
 - [x] Prepare the complete DEV Markdown with actual links, measurements and five verified screenshots. Deliver the entire Markdown in chat for review.
-- [ ] Obtain article review. Do not publish DEV automatically.
+- [x] Deliver the complete article for review; the user manually published it and supplied the actual URL. No automatic DEV publishing was performed.
+- [x] Verify the published post at https://dev.to/faris-khan/everyone-wanted-to-help-nobody-had-the-whole-plan-2pjk: body matches the prepared Markdown, both required challenge tags are present, and the video embed, repository link and five screenshot URLs are present and usable. See `docs/dev-publication-verification.json`.
 
-Current status: application, public source, narrated video and article assets complete. User article review and manual DEV publication remain. There is no hosted application deployment, and DEV has not been published automatically.
+Current status: application, public source, narrated video and user-published DEV submission complete. There is no hosted application deployment. No account or article was automatically selected or published.

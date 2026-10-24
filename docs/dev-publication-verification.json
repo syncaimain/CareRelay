@@ -1,0 +1,51 @@
+{
+  "url": "https://dev.to/faris-khan/everyone-wanted-to-help-nobody-had-the-whole-plan-2pjk",
+  "article_id": 4912065,
+  "title": "Everyone Wanted to Help. Nobody Had the Whole Plan",
+  "author": "faris-khan",
+  "published_at": "2026-10-24T19:22:07Z",
+  "tags": "devchallenge, hf26challenge",
+  "matches_local_article_body": true,
+  "replacement_character_count": 0,
+  "youtube_embed_present": true,
+  "github_link_present": true,
+  "screenshot_count": 5,
+  "all_public_links_http_200": true,
+  "links": [
+    {
+      "url": "https://dev.to/faris-khan/everyone-wanted-to-help-nobody-had-the-whole-plan-2pjk",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://github.com/syncaimain/CareRelay",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/syncaimain/CareRelay/d4b6c28039f7481b8912cf414ef8ef28afadf011/demo/assets/screenshots/01-overview.png",
+      "status": 200,
+      "content_type": "image/png"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/syncaimain/CareRelay/d4b6c28039f7481b8912cf414ef8ef28afadf011/demo/assets/screenshots/02-source.png",
+      "status": 200,
+      "content_type": "image/png"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/syncaimain/CareRelay/d4b6c28039f7481b8912cf414ef8ef28afadf011/demo/assets/screenshots/06-handoff.png",
+      "status": 200,
+      "content_type": "image/png"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/syncaimain/CareRelay/d4b6c28039f7481b8912cf414ef8ef28afadf011/demo/assets/screenshots/03-evidence.png",
+      "status": 200,
+      "content_type": "image/png"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/syncaimain/CareRelay/d4b6c28039f7481b8912cf414ef8ef28afadf011/demo/assets/screenshots/04-board.png",
+      "status": 200,
+      "content_type": "image/png"
+    }
+  ]
+}

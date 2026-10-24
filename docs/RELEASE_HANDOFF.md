@@ -8,7 +8,7 @@
 - Voiceover: `demo/assets/audio/kokoro_voiceover.wav`.
 - Captions: `demo/assets/audio/subtitles.srt`; also embedded as an English subtitle track.
 - Verification: `docs/final-video-verification.json`.
-- Article: `docs/DEV_SUBMISSION.md`, complete Markdown with real repository/video links and five verified screenshots; ready for user review.
+- Article: `docs/DEV_SUBMISSION.md`, complete Markdown with real repository/video links and five verified screenshots. The user manually published it at https://dev.to/faris-khan/everyone-wanted-to-help-nobody-had-the-whole-plan-2pjk.
 
 ## GitHub checkpoint
 
@@ -32,4 +32,4 @@ The five article screenshots are pinned to asset commit `d4b6c28039f7481b8912cf4
 
 The user uploaded the demonstration to https://youtu.be/ylEdw_ICXTU. YouTube's public oEmbed endpoint verified the title “Care Relay” and author “Syncai”; the canonical watch page also returned successfully. Upload the separate SRT as captions if needed; the MP4's embedded subtitle track is not a guarantee that YouTube will import captions automatically.
 
-The verified YouTube embed and screenshot links are in the article. Display the entire Markdown for user review before manual DEV publication. User article review remains pending; no DEV post has been published automatically. The application remains a local prototype, with no hosted application deployment.
+The entire Markdown was displayed for user review. The user manually published the article and supplied its actual URL. The public DEV API confirms the published body matches the prepared Markdown, both required challenge tags are present, and the rendered body includes the video embed and repository link. All five screenshot URLs return HTTP 200. Verification is recorded in `docs/dev-publication-verification.json`. No automatic DEV publication was performed. The application remains a local prototype, with no hosted application deployment.
