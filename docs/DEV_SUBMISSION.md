@@ -24,6 +24,8 @@ The demonstration was recorded at 1920×1080 with real local model inference and
 
 The recorded journey follows a clinic appointment change, a proposed driver whose work shift overlaps the journey, and an unassigned return ride. Robin explicitly accepts her own library pickup. The original appointment becomes cancelled when its replacement is approved. The final handoff keeps that accepted commitment separate from the unresolved replacement appointment and its transport question.
 
+The video shows the family coordination journey. The Temporal integration was added afterward; its actual recovery test and workflow screenshot are documented below.
+
 ![Synthetic conversation in the import inbox, with an explicit reference time and visibility choice](https://raw.githubusercontent.com/syncaimain/CareRelay/d4b6c28039f7481b8912cf414ef8ef28afadf011/demo/assets/screenshots/02-source.png)
 
 ![Human-approved handoff separating accepted commitments from unresolved responsibilities](https://raw.githubusercontent.com/syncaimain/CareRelay/d4b6c28039f7481b8912cf414ef8ef28afadf011/demo/assets/screenshots/06-handoff.png)
@@ -58,11 +60,15 @@ I deliberately avoided asking the model to turn the board into unrestricted pros
 
 The backend also draws a boundary around each imported source. A source is shared with the circle or private to its importer. A coordinator is not automatically allowed to read another person's private material. Import, review and briefing permissions are checked on the server, and responsibility acceptance is restricted to the person concerned. The activity view shows the signed-in person's own events. None of these decisions depend on a hidden button in the browser.
 
-The implementation stays small enough to run locally: parameterized SQLite queries and transactions, explicit state transitions, Pydantic request validation, and an in-process inference job. An identical source with the same reference timestamp is not repeatedly imported. If inference fails, the job remains visibly failed and can be retried. A server restart marks unfinished jobs for retry instead of presenting them as completed work.
+An import also needs to survive the machine doing the coordination work. CareRelay now uses a local, persistent Temporal service and a separate Python worker. FastAPI commits the source and queued job in one SQLite transaction. An outbox dispatcher starts a workflow with a stable job ID. If the API stops after Temporal accepts that start but before the dispatch marker is saved, starting it again cannot create a second execution.
+
+The worker runs local model inference as a heartbeating Activity. Transient failures retry with bounded exponential backoff, while unverifiable evidence and revoked permissions fail without repeated inference. Only the current attempt can commit its result; a completed-job check prevents duplicate suggestions when an Activity is delivered again. The worker checks import permission again after the model returns. Workflow payloads contain job IDs and counts; source text and caregiver tokens stay in the local application database. Human review and caregiver consent remain separate from execution recovery.
+
+I tested that boundary with the actual Temporal service and Ministral pipeline. First I queued an import without a worker, restarted the API, and confirmed the same job remained queued. Then I forced an unreachable Ollama endpoint and restored the real model. A second import lost both its worker and API during extraction. Both imports completed on attempt 2, without duplicate tasks, and their results still required review. The recovery check took 33.36 seconds on the development machine; it is a reproducible failure exercise, not a latency benchmark. Restarting the persistent Temporal service afterward preserved the completed workflow and its run ID. The script and raw verification report are included in the repository.
 
 The current prototype is intended for fictional data on a trusted local machine. It does not yet provide production identity verification or encrypted storage. The demo's profile switcher exists to demonstrate consent and permission boundaries, not to claim independent authentication for real households.
 
-The interface was revised after visual review: white and slate surfaces, teal accents, sans-serif headings, larger controls, and clearer secondary text. All 23 deterministic backend/evaluation tests, TypeScript checking, a full production build and a genuine Chromium journey pass. Desktop and mobile screenshots were inspected at 1440×1000 and 390×844, with no detected horizontal mobile overflow or browser page errors.
+The interface was revised after visual review: white and slate surfaces, teal accents, sans-serif headings, larger controls, and clearer secondary text. All 28 deterministic backend/evaluation tests, TypeScript checking, a full production build and a genuine Chromium journey pass. Desktop and mobile screenshots were inspected at 1440×1000 and 390×844, with no detected horizontal mobile overflow or browser page errors. A queued import also survives a browser refresh and reaches review automatically when its worker starts.
 
 Measurement also changed the implementation. The initial 32-message synthetic evaluation scored 77.8% strict category precision and recall. Confirmations were sometimes classified as appointments; cancellations sometimes changed the task category; the model sometimes assumed UTC even though the source reference carried a local timezone.
 
@@ -92,4 +98,4 @@ Alex still has to ask whether Maya can drive. Robin still has to decide whether 
 
 ## Prize Categories
 
-I am entering the overall Week 3 challenge. No partner prize category is claimed because no qualifying partner integration is implemented.
+I am entering the overall Week 3 challenge and **Best Use of Temporal**. CareRelay uses Temporal workflows and heartbeating Activities to recover local AI imports after worker/API failures, retry transient inference failures, and preserve progress without duplicating suggestions. The repository includes the working integration, reproducible recovery script, actual workflow screenshot and verification results.

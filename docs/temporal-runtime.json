@@ -1,0 +1,10 @@
+{
+  "version": "1.9.1",
+  "archive": "temporal_cli_1.9.1_windows_amd64.zip",
+  "sha256": "babb65844835045c91fb98930fe10b81de28db80c8c609180473d2c0b18c7589",
+  "official_checksum_matched": true,
+  "sdk": "1.34.0",
+  "server": "1.32.0",
+  "ui": "2.54.1",
+  "persistent_service_restart_verified": true
+}

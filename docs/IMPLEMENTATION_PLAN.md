@@ -6,6 +6,7 @@
 4. Build the accessible Next.js interface and verify the complete browser journey against the real backend/model.
 5. Record reproducible evaluation and actual demo assets. Document limitations and manual/Docker setup.
 6. Only after the app is verified, request the required GitHub destination, Kokoro voice and YouTube handoff at their respective publication checkpoints in BUILD_PROMPT.md.
+7. Add the user-selected Temporal partner integration: persistent service, durable extraction workflows, idempotent commits, bounded retries and real API/worker crash recovery. Preserve human review, consent and private-source boundaries. Verify the integration before claiming Best Use of Temporal.
 
 ## Environment inspection
 

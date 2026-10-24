@@ -19,9 +19,14 @@ The user selected `syncaimain/CareRelay`, confirmed public visibility, and deleg
 - [x] Generate real Kokoro `am_fenrir` voiceover, phrase-aligned subtitles and `final_demo.mp4`; verify full decoding, stream formats, audio levels and subtitle timing. Final duration: 108.08 seconds.
 - [x] Give the precise final video path and request upload to the user's chosen YouTube account as Public or Unlisted. The actual URL has now been supplied and verified.
 - [x] Validate the supplied YouTube URL (`https://youtu.be/ylEdw_ICXTU`, “Care Relay” by Syncai) through public oEmbed and a successful canonical watch-page response; add the real video ID to the DEV embed.
-- [x] Verify the official Week 3 prompt and required tags (`devchallenge`, `hf26challenge`); overall submission only, with no unsupported partner category claims and no Gemma.
+- [x] Verify the official Week 3 prompt and required tags (`devchallenge`, `hf26challenge`); exclude Gemma and claim only implemented, verified partner integrations.
 - [x] Prepare the complete DEV Markdown with actual links, measurements and five verified screenshots. Deliver the entire Markdown in chat for review.
 - [x] Deliver the complete article for review; the user manually published it and supplied the actual URL. No automatic DEV publishing was performed.
 - [x] Verify the published post at https://dev.to/faris-khan/everyone-wanted-to-help-nobody-had-the-whole-plan-2pjk: body matches the prepared Markdown, both required challenge tags are present, and the video embed, repository link and five screenshot URLs are present and usable. See `docs/dev-publication-verification.json`.
 
-Current status: application, public source, narrated video and user-published DEV submission complete. There is no hosted application deployment. No account or article was automatically selected or published.
+- [x] Implement the user-selected Temporal integration with persistent local service, transactional dispatch, retrying Activities and attempt-checked idempotent commits.
+- [x] Verify actual API/worker crash recovery and real-model retry, preserve private-job access and human review, and inspect actual Temporal workflow evidence.
+- [x] Verify 28 deterministic tests, TypeScript, production build and the genuine browser journey after integrating Temporal.
+- [ ] User manually updates the existing DEV post with the new Temporal evidence and Best Use of Temporal category. The original DEV verification report predates this revision.
+
+Current status: application and Temporal integration verified; revised article ready for user review and manual DEV update. There is no hosted application deployment. No account or article was automatically selected or published.

@@ -21,6 +21,16 @@ Development environment: Windows, Python 3.12.7, Node 22.14.0, NVIDIA RTX 4090 w
 - After the requested UI redesign, the production Chromium import/review/consent/handoff test passed again in 7.7 seconds. The original 1.3-minute run included a cold-model wait; these are individual runs rather than a latency benchmark.
 - Final narration used genuine Kokoro-82M `am_fenrir` on CPU, selected under the user's direction to use a non-default voice. Twelve speech segments were fitted to the actual demo timeline; eleven needed no tempo change and one needed approximately 1.022×. The WAV is 24 kHz with peak 0.860 and zero clipped samples. Final MP4 streams are 1920×1080 H.264, 48 kHz mono AAC and English `mov_text` subtitles; duration 108.08 seconds. The unused closing hold was trimmed after the speech ended at 105.904 seconds. Full FFmpeg decoding passed. This is phrase-level caption timing, not forced word alignment.
 
+## Temporal integration verification (October 25)
+
+After integrating Temporal, **28/28 deterministic backend/evaluation tests passed in 34.86 seconds**. New cases exercise durable dispatch after a service outage/start-marker gap, stale-attempt fencing and commit idempotency, permission revocation during inference, API restart/private-source isolation, and non-retryable evidence rejection using the actual SDK Activity test environment. Fixtures remain synthetic and explicitly mocked only in deterministic tests.
+
+The separate **real Temporal/Ollama recovery check passed in 33.36 seconds**, including a queued API restart, an intentionally unreachable inference endpoint followed by actual model recovery, and a forced worker/API crash during extraction. Both recovered jobs completed on attempt 2. Temporal's final Activity-start event includes the prior heartbeat timeout. Duplicate starts were rejected, no duplicate tasks were created, all results remained suggested/unaccepted, and workflow payloads excluded source text and caregiver tokens. See `temporal-verification.json` and `scripts/verify_temporal.py`.
+
+The persistent Temporal service was then restarted separately; the same completed workflow and run ID remained available. Runtime: Python SDK 1.34.0, verified official CLI 1.9.1, server 1.32.0, UI 2.54.1. The actual workflow screenshot shows completion and attempt 2. A real Chromium check confirmed a queued import survives browser refresh and completes after the worker starts, with source evidence visible and no mobile overflow or page errors. The complete genuine extraction/review/consent/handoff browser test passed in **8.4 seconds** (9.0 seconds total runner time). TypeScript and the full production build passed. These are individual checks, not latency benchmarks.
+
+The original narrated video predates the Temporal addition and demonstrates the family coordination journey. The new recovery report and screenshots demonstrate Temporal separately. The extraction prompt and the earlier labeled development-set reports below are retained; no new full-corpus accuracy result is claimed from this integration check.
+
 ## Reproducible real-model evaluation
 
 The full 32-message baseline completed: **77.8% strict category precision and recall** (21 true positives, 6 false positives and 6 false negatives), in 121.147 seconds. The complete original report is preserved in `evaluation-baseline.json`.

@@ -8,6 +8,9 @@ services:
       OLLAMA_MODEL: ministral-3:14b
       CARERELAY_DB: /app/data/carerelay.sqlite3
       CARERELAY_DEMO: "true"
+      # This optional legacy Compose path uses inline extraction. The verified
+      # durable Temporal setup is documented in docs/TEMPORAL.md.
+      CARERELAY_IMPORT_ENGINE: inline
     volumes:
       - care-data:/app/data
     # Share the frontend's network namespace so its API proxy reaches loopback

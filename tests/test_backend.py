@@ -1,4 +1,5 @@
 import json
+import asyncio
 import uuid
 from datetime import datetime
 from pathlib import Path
@@ -9,6 +10,8 @@ from fastapi.testclient import TestClient
 from backend import ai
 from backend.main import app
 from backend.schemas import Extraction, SuggestedItem
+from backend.db import connect
+from backend.import_jobs import prepare_import, save_import
 
 
 @pytest.fixture
@@ -19,6 +22,7 @@ def client(monkeypatch):
     path.parent.mkdir(exist_ok=True)
     monkeypatch.setenv('CARERELAY_DB', str(path))
     monkeypatch.setenv('CARERELAY_DEMO', 'true')
+    monkeypatch.setenv('CARERELAY_IMPORT_ENGINE', 'inline')
     with TestClient(app) as client:
         yield client
     path.unlink(missing_ok=True)
@@ -292,3 +296,103 @@ def test_inaccessible_model_reference_is_rejected_before_writing(client, monkeyp
     assert state(client, alex)['tasks'] == []
     result = client.get('/api/jobs/' + job['job_id'], headers=auth(alex)).json()
     assert result['status'] == 'failed'
+
+
+def test_temporal_outbox_survives_service_outage_and_dispatch_gap(client, monkeypatch):
+    from types import SimpleNamespace
+    from temporalio.client import WorkflowExecutionStatus
+    from temporalio.exceptions import WorkflowAlreadyStartedError
+    from backend.temporal_dispatch import dispatch_once
+    monkeypatch.setenv('CARERELAY_IMPORT_ENGINE', 'temporal')
+    alex = circle(client)[0]
+    job_id = imported(client, alex)['job_id']
+    job = client.get('/api/jobs/' + job_id, headers=auth(alex)).json()
+    assert job['status'] == 'queued' and job['dispatched'] == 0
+    assert imported(client, alex)['job_id'] == job_id
+
+    class Unavailable:
+        async def start_workflow(self, *args, **kwargs):
+            raise ConnectionError('offline')
+
+    asyncio.run(dispatch_once(Unavailable()))
+    assert client.get('/api/jobs/' + job_id, headers=auth(alex)).json()['status'] == 'queued'
+    calls = []
+
+    class AcceptedBeforeCrash:
+        async def start_workflow(self, name, argument, **kwargs):
+            calls.append((name, argument, kwargs['id']))
+            raise WorkflowAlreadyStartedError(kwargs['id'], name)
+
+        def get_workflow_handle(self, workflow_id):
+            return self
+
+        async def describe(self, **kwargs):
+            return SimpleNamespace(status=WorkflowExecutionStatus.RUNNING)
+
+    asyncio.run(dispatch_once(AcceptedBeforeCrash()))
+    recovered = client.get('/api/jobs/' + job_id, headers=auth(alex)).json()
+    assert recovered['dispatched'] == 1
+    assert calls == [('CareRelayImport', job_id, 'carerelay-import-' + job_id)]
+    assert alex['token'] not in str(calls)
+    assert 'Alex will book' not in str(calls)
+
+
+def test_temporal_attempt_fencing_and_commit_are_idempotent(client, monkeypatch):
+    monkeypatch.setenv('CARERELAY_IMPORT_ENGINE', 'temporal')
+    alex = circle(client)[0]
+    job_id = imported(client, alex)['job_id']
+    first = prepare_import(job_id, 1)
+    second = prepare_import(job_id, 2)
+    result = Extraction(items=[suggestion(source_id=first[1]['id'])])
+    assert save_import(job_id, first, result, 1) == 0
+    assert state(client, alex)['tasks'] == []
+    assert save_import(job_id, second, result, 2) == 1
+    assert save_import(job_id, second, result, 2) == 1
+    assert prepare_import(job_id, 3) is None
+    data = state(client, alex)
+    assert len(data['tasks']) == 1
+    assert len([x for x in data['audit'] if x['action'] == 'extraction_completed']) == 1
+
+
+def test_temporal_rechecks_permission_before_commit(client, monkeypatch):
+    monkeypatch.setenv('CARERELAY_IMPORT_ENGINE', 'temporal')
+    alex, maya, *_ = circle(client)
+    job_id = imported(client, maya)['job_id']
+    context = prepare_import(job_id, 1)
+    assert client.patch(f"/api/caregivers/{maya['id']}/permissions", headers=auth(alex), json={
+        'can_import': False, 'can_review': False, 'can_brief': True}).status_code == 200
+    with pytest.raises(ValueError, match='revoked'):
+        save_import(job_id, context, Extraction(items=[suggestion(source_id=context[1]['id'])]), 1)
+    assert state(client, alex)['tasks'] == []
+
+
+def test_temporal_jobs_survive_api_restart_and_keep_private_access(client, monkeypatch):
+    import backend.temporal_dispatch as dispatch
+    monkeypatch.setenv('CARERELAY_IMPORT_ENGINE', 'temporal')
+    alex, maya, *_ = circle(client)
+    job_id = imported(client, alex, visibility='private')['job_id']
+    prepare_import(job_id, 1)
+    async def idle():
+        await asyncio.Event().wait()
+    monkeypatch.setattr(dispatch, 'dispatch_forever', idle)
+    with TestClient(app) as restarted:
+        job = restarted.get('/api/jobs/' + job_id, headers=auth(alex)).json()
+        assert job['status'] == 'processing' and job['attempts'] == 1
+        assert restarted.get('/api/jobs/' + job_id, headers=auth(maya)).status_code == 404
+        assert state(restarted, maya)['sources'] == []
+
+
+def test_temporal_invalid_evidence_is_non_retryable(client, monkeypatch):
+    from temporalio.exceptions import ApplicationError
+    from temporalio.testing import ActivityEnvironment
+    from backend.temporal_worker import extract_import
+    monkeypatch.setenv('CARERELAY_IMPORT_ENGINE', 'temporal')
+    install_extractor(monkeypatch, quote='A fabricated quote that does not exist in the source.')
+    alex = circle(client)[0]
+    job_id = imported(client, alex)['job_id']
+    with pytest.raises(ApplicationError) as failure:
+        asyncio.run(ActivityEnvironment().run(extract_import, job_id))
+    assert failure.value.non_retryable
+    assert failure.value.type == 'ImportValidationError'
+    assert state(client, alex)['tasks'] == []
+    assert client.get('/api/jobs/' + job_id, headers=auth(alex)).json()['status'] == 'failed'

@@ -50,6 +50,7 @@ export default function Workspace() {
   const [visibility, setVisibility] = useState('circle');
   const [synthetic, setSynthetic] = useState(true);
   const [jobId, setJobId] = useState('');
+  const [jobProgress, setJobProgress] = useState('Your import is saved and waiting to start.');
   const [selectedDraft, setSelectedDraft] = useState<number | null>(null);
   const [approvedText, setApprovedText] = useState('');
   const fileRef = useRef<HTMLInputElement>(null);
@@ -79,6 +80,12 @@ export default function Workspace() {
     check(); const timer = setInterval(check, 15000); return () => clearInterval(timer);
   }, [api]);
   useEffect(() => {
+    if (!jobId && data) {
+      const pending = data.jobs.find(job => job.status === 'queued' || job.status === 'processing');
+      if (pending) setJobId(pending.id);
+    }
+  }, [data, jobId]);
+  useEffect(() => {
     if (!jobId) return;
     const poll = async () => {
       try {
@@ -86,12 +93,16 @@ export default function Workspace() {
         if (job.status === 'completed') {
           setJobId(''); setNotice(`${job.item_count} suggestions are ready for your review.`); await refresh(); setView('Review queue');
         } else if (job.status === 'failed') { setJobId(''); setError(job.error); await refresh(); }
-      } catch (e) { setJobId(''); setError(e instanceof Error ? e.message : 'Could not check import progress.'); }
+        else setJobProgress(job.status === 'queued'
+          ? 'Your import is saved and waiting for the local worker. It will start automatically when the worker is available.'
+          : job.attempts > 1 ? 'Your saved import is retrying after an interruption. No need to submit it again.'
+          : 'Your local model is reading the source. Suggestions will appear in the review queue.');
+      } catch { setJobProgress('Connection interrupted. Your import is saved; progress will reconnect automatically.'); }
     };
     const timer = setInterval(poll, 1800); poll(); return () => clearInterval(timer);
   }, [api, jobId, refresh]);
   useEffect(() => { setApprovedText(''); }, [selectedDraft, token]);
-  const signIn = (value: string) => { sessionStorage.setItem('carerelay-token', value); setToken(value); setData(null); setError(''); setApprovedText(''); };
+  const signIn = (value: string) => { sessionStorage.setItem('carerelay-token', value); setJobId(''); setToken(value); setData(null); setError(''); setApprovedText(''); };
   const createDemo = () => run(async () => {
     const result = await api('/demo', {method: 'POST'});
     sessionStorage.setItem('carerelay-profiles', JSON.stringify(result.profiles));
@@ -169,7 +180,7 @@ export default function Workspace() {
           <div className="import-toolbar"><input ref={fileRef} type="file" accept=".txt,text/plain" hidden onChange={e => {const file=e.target.files?.[0]; if(file) run(async () => {if(file.size>48000) throw new Error('Choose a plain text file under 48 KB.'); setImportText(await file.text()); setImportLabel(file.name);});}}/><Button variant="ghost" size="sm" type="button" onClick={() => fileRef.current?.click()}><ArrowDownToLine size={15}/>Upload .txt</Button><span>{importText.length.toLocaleString()} / 24,000</span></div>
           <div className="field-grid"><label>Who can see this source?<select value={visibility} onChange={e => setVisibility(e.target.value)}><option value="circle">Everyone in this care circle</option><option value="private">Only me</option></select></label><label className="checkbox-label"><input type="checkbox" checked={synthetic} onChange={e => setSynthetic(e.target.checked)}/>This is fictional / synthetic input</label></div>
           <div className="form-footer"><span><LockKeyhole size={14}/>Processed by {health.model} on this machine</span><Button disabled={busy || !!jobId || health.status !== 'ready' || !data.me.can_import} type="submit">{jobId ? <LoaderCircle size={16} className="spin"/> : <Sparkles size={16}/>} {jobId ? 'Finding the pieces…' : 'Find coordination tasks'}</Button></div>
-        </form>{jobId && <div className="processing-note" role="status">Your local model is reading the source. This may take a few minutes; suggestions will appear in the review queue.</div>}
+        </form>{jobId && <div className="processing-note" role="status">{jobProgress}</div>}
       </section><div><section className="panel demo-card"><span className="tiny-tag">TRY THE STORY</span><h2>One changed appointment.<br/>One missing ride.</h2><p>Load a short fictional family conversation, then let the local model find what needs attention.</p><Button variant="outline" onClick={() => run(async () => {const dataset = await api('/demo/messages'); setImportText(dataset.demo_text); setReference(dataset.reference_at.slice(0,16)); setSynthetic(true); setImportLabel('Morgan family · synthetic conversation');})}>Load fictional conversation<ArrowRight size={15}/></Button><small>The full labeled, two-week dataset is included in the project.</small></section>
         <section className="source-history"><div className="eyebrow">RECENT IMPORTS</div>{data.sources.length ? data.sources.slice(0,6).map(s => <div className="history-item" key={s.id}><FileText size={17}/><div><strong>{s.label}</strong><small>Source #{s.id} · {s.synthetic ? 'Synthetic input' : 'User-provided input'}</small></div></div>) : <p>Your imported sources will stay here for reference.</p>}{data.jobs.filter(j => j.status === 'failed').slice(0,2).map(j => <div className="alert error" key={j.id}>Import failed: {j.error} Submit the source again to retry.</div>)}</section>
       </div></div>}

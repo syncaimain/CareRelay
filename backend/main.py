@@ -1,8 +1,9 @@
+import asyncio
 import hashlib
 import json
 import os
 import secrets
-from contextlib import asynccontextmanager
+from contextlib import asynccontextmanager, suppress
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -14,6 +15,7 @@ from dotenv import load_dotenv
 from . import ai
 from .db import audit, connect, digest, initialize, make_token, now
 from .schemas import AvailabilityRequest, DraftRequest, ImportRequest, PermissionRequest, ReviewRequest
+from .import_jobs import import_engine, run_inline
 
 load_dotenv()
 
@@ -22,8 +24,18 @@ load_dotenv()
 async def lifespan(app):
     initialize()
     with connect() as db:
-        db.execute("UPDATE jobs SET status='failed',error='Server restarted; retry the import.' WHERE status='processing'")
-    yield
+        db.execute("UPDATE jobs SET status='failed',error='Server restarted; retry the inline import.' WHERE status='processing' AND engine='inline'")
+    dispatcher = None
+    if import_engine() == 'temporal':
+        from .temporal_dispatch import dispatch_forever
+        dispatcher = asyncio.create_task(dispatch_forever())
+    try:
+        yield
+    finally:
+        if dispatcher:
+            dispatcher.cancel()
+            with suppress(asyncio.CancelledError):
+                await dispatcher
 
 
 app = FastAPI(title='CareRelay', version='0.1.0', lifespan=lifespan)
@@ -138,42 +150,13 @@ def state(user=Depends(actor)):
             'audit': events, 'jobs': jobs, 'conflicts': conflicts(tasks, availability)}
 
 
-async def process_job(job_id, source_id, user):
-    try:
-        with connect() as db:
-            source = dict(db.execute('SELECT * FROM sources WHERE id=?', (source_id,)).fetchone())
-            caregivers = [dict(x) for x in db.execute('SELECT id,name FROM caregivers WHERE circle_id=?', (user['circle_id'],))]
-            existing = [t for t in tasks_for(db, user) if t['status'] == 'confirmed']
-        result = await ai.extract(source, caregivers, existing)
-        verified = [ai.validate_evidence(i, source, caregivers, existing) for i in result.items]
-        with connect() as db:
-            # Permission may have been revoked while inference was running.
-            current = db.execute('SELECT can_import FROM caregivers WHERE id=?', (user['id'],)).fetchone()
-            if not current or not current['can_import']:
-                raise ValueError('Import permission was revoked during extraction.')
-            for item in verified:
-                duplicate = db.execute('SELECT id FROM tasks WHERE source_id=? AND quote=? AND kind=? AND title=?',
-                                       (source_id, item['quote'], item['kind'], item['title'])).fetchone()
-                if duplicate:
-                    continue
-                db.execute('''INSERT INTO tasks(circle_id,source_id,quote,title,kind,due_at,owner_id,location,
-                    uncertainty,change_type,related_task_id,model,created_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)''',
-                    (user['circle_id'], source_id, item['quote'], item['title'], item['kind'], item['due_at'],
-                     item['owner_id'], item['location'], item['uncertainty'], item['change_type'], item['related_task_id'], ai.model_name(), now()))
-            db.execute("UPDATE jobs SET status='completed',item_count=? WHERE id=?", (len(verified), job_id))
-            audit(db, user, 'extraction_completed', source_id)
-    except Exception as exc:
-        # No source text or credentials in error/log output.
-        message = str(exc) if isinstance(exc, ValueError) else 'Local model inference failed. Check Ollama and retry.'
-        with connect() as db:
-            db.execute("UPDATE jobs SET status='failed',error=? WHERE id=?", (message[:300], job_id))
-
-
 @app.post('/api/imports', status_code=202)
 def import_text(payload: ImportRequest, background: BackgroundTasks, user=Depends(actor)):
     require(user, 'can_import')
     fingerprint = hashlib.sha256((payload.text.strip() + payload.reference_at.isoformat()).encode()).hexdigest()
+    engine = import_engine()
     with connect() as db:
+        db.execute('BEGIN IMMEDIATE')
         source = db.execute('SELECT * FROM sources WHERE circle_id=? AND author_id=? AND visibility=? AND fingerprint=?',
                             (user['circle_id'], user['id'], payload.visibility, fingerprint)).fetchone()
         if source:
@@ -186,10 +169,13 @@ def import_text(payload: ImportRequest, background: BackgroundTasks, user=Depend
                 VALUES(?,?,?,?,?,?,?,?,?)''', (user['circle_id'], user['id'], payload.label, payload.text.strip(),
                     payload.reference_at.isoformat(), payload.synthetic, payload.visibility, fingerprint, now())).lastrowid
         job_id = secrets.token_hex(12)
-        db.execute("INSERT INTO jobs(id,circle_id,actor_id,source_id,status,model,created_at) VALUES(?,?,?,?,'processing',?,?)",
-                   (job_id, user['circle_id'], user['id'], source_id, ai.model_name(), now()))
+        db.execute('''INSERT INTO jobs(id,circle_id,actor_id,source_id,status,model,created_at,engine,workflow_id)
+            VALUES(?,?,?,?,?,?,?,?,?)''',
+            (job_id, user['circle_id'], user['id'], source_id, 'queued' if engine == 'temporal' else 'processing',
+             ai.model_name(), now(), engine, 'carerelay-import-' + job_id if engine == 'temporal' else None))
         audit(db, user, 'import_started', source_id)
-    background.add_task(process_job, job_id, source_id, user)
+    if engine == 'inline':
+        background.add_task(run_inline, job_id)
     return {'job_id': job_id, 'duplicate': False}
 
 

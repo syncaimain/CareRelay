@@ -81,6 +81,17 @@ def initialize():
           target TEXT NOT NULL, created_at TEXT NOT NULL
         );
         ''')
+        # Existing local databases keep their original inline jobs. New imports
+        # select their engine explicitly; migrations never rewrite demo history.
+        columns = {row['name'] for row in db.execute('PRAGMA table_info(jobs)')}
+        for name, declaration in {
+            'engine': "TEXT NOT NULL DEFAULT 'inline'",
+            'workflow_id': 'TEXT',
+            'dispatched': 'INTEGER NOT NULL DEFAULT 0',
+            'attempts': 'INTEGER NOT NULL DEFAULT 0',
+        }.items():
+            if name not in columns:
+                db.execute(f'ALTER TABLE jobs ADD COLUMN {name} {declaration}')
 
 
 def audit(db, actor, action, target):

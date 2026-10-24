@@ -19,9 +19,18 @@ python -m venv .venv
 pip install -r backend/requirements.txt
 Copy-Item .env.example .env
 npm install
+python scripts/install_temporal.py
 ```
 
 Run these in separate terminals from this directory:
+
+```powershell
+.\.tools\temporal\temporal.exe server start-dev --ip 127.0.0.1 --port 7233 --ui-port 8233 --db-filename data/temporal.sqlite --ui-disable-news-fetch
+```
+
+```powershell
+python -m backend.temporal_worker
+```
 
 ```powershell
 python -m uvicorn backend.main:app --host 127.0.0.1 --port 8104
@@ -33,7 +42,7 @@ npm run dev
 
 Open **http://127.0.0.1:3104**. Ollama should already be running on `127.0.0.1:11434` (otherwise run `ollama serve`). Create a fictional care circle and use **Import inbox → Load fictional conversation**. The model indicator must show ready before importing.
 
-An **untested optional Docker Compose configuration** is included (`docker compose up --build`). It uses Docker Desktop's `host.docker.internal` for Ollama, which must be reachable from the container. The frontend and backend share a network namespace so the API proxy remains loopback-local. Manual startup above is the primary documented path; no Docker run has been verified in this session.
+An **untested optional Docker Compose configuration** is included (`docker compose up --build`). It explicitly uses the original inline import engine and Docker Desktop's `host.docker.internal` for Ollama. The frontend and backend share a network namespace so the API proxy remains loopback-local. The manual Temporal setup above is the verified durable path; see [Temporal setup and recovery evidence](docs/TEMPORAL.md). On non-Windows systems, install the CLI using [Temporal's official instructions](https://docs.temporal.io/cli/setup-cli) instead of the Windows installer.
 
 The browser talks through Next.js to FastAPI; its rewrite defaults to port 8104. Set `BACKEND_URL` when using a different backend address. All displayed planning times use PKT (UTC+05:00); imported timestamps must include a timezone. For production compilation use `npm run build` and `npm start`.
 
@@ -42,7 +51,7 @@ The browser talks through Next.js to FastAPI; its rewrite defaults to port 8104.
 - Four synthetic caregiver profiles and seeded unavailability windows.
 - Paste/upload plain text, label synthetic inputs, select private or circle visibility, and set the source reference time.
 - Genuine local Ollama extraction with a typed JSON schema. Exact quotes and source IDs are validated before any suggestion is saved. A failed quote rejects the whole extraction result.
-- Background import jobs, visible progress/failure, duplicate import detection and retry after inference failure.
+- Durable Temporal import workflows, a persistent local service, a separate extraction worker, automatic transient retries and recovery after API/worker restarts. A transactional SQLite outbox and attempt-checked commits prevent duplicate workflow starts and duplicate suggestions. Queued imports reconnect after a browser refresh.
 - Edit/approve/reject queue, with explicit date and uncertainty acknowledgement.
 - Approved responsibility board and calendar; caregivers accept their own proposed assignments. A proposed name alone never means consent.
 - Unassigned travel, overlapping assignments and unavailability warnings. Task duration is a documented one-hour scheduling estimate.
@@ -78,6 +87,7 @@ Model extractions can still contain factual errors even when a quote is genuine.
 ## Project
 
 - [Architecture](docs/ARCHITECTURE.md)
+- [Temporal setup and recovery verification](docs/TEMPORAL.md)
 - [Implementation plan](docs/IMPLEMENTATION_PLAN.md)
 - [Demo script](docs/DEMO_SCRIPT.md)
 - [Publishing checklist](docs/PUBLISHING_CHECKLIST.md)

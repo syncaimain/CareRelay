@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 os.environ['CARERELAY_DB'] = str(ROOT / 'data' / ('api-smoke-' + uuid.uuid4().hex + '.sqlite3'))
 os.environ['CARERELAY_DEMO'] = 'true'
+os.environ['CARERELAY_IMPORT_ENGINE'] = 'inline'
 
 from fastapi.testclient import TestClient
 from backend.main import app
