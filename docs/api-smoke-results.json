@@ -1,0 +1,12 @@
+{
+  "model": "ministral-3:14b",
+  "synthetic": true,
+  "passed": true,
+  "transport_quote_verified": true,
+  "extracted_due_timestamp_correct": false,
+  "human_reviewed_due_timestamp": "2026-10-26T09:00:00+05:00",
+  "owner_attribution_correct": true,
+  "review_and_consent_verified": true,
+  "handoff_approved": true,
+  "seconds": 4.36
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "start": 0.8,
+    "end": 6.1,
+    "text": "Four relatives want to help. Who has the whole plan?"
+  },
+  {
+    "start": 6.2,
+    "end": 11.2,
+    "text": "CareRelay gives a fictional family one shared coordination workspace."
+  },
+  {
+    "start": 11.3,
+    "end": 17.2,
+    "text": "Start with the original messages. The reference date keeps local times in context."
+  },
+  {
+    "start": 17.4,
+    "end": 26.6,
+    "text": "Ministral Three, fourteen billion parameters, reads the source locally through Ollama. The input is synthetic. The inference is real."
+  },
+  {
+    "start": 27.0,
+    "end": 40.4,
+    "text": "Each suggestion includes its source quote. A reviewer checks the task, date, proposed caregiver, and uncertainty before approving. The plan only contains items a person has reviewed."
+  },
+  {
+    "start": 40.8,
+    "end": 46.8,
+    "text": "Maya has a work conflict. The return ride has no driver. Both stay visible."
+  },
+  {
+    "start": 47.1,
+    "end": 51.5,
+    "text": "Robin accepts her pickup. Only she can give that consent."
+  },
+  {
+    "start": 51.8,
+    "end": 66.8,
+    "text": "Now the appointment moves. The reviewer selects the original item and confirms the new time. CareRelay cancels the old record and keeps the replacement. Transport remains a separate decision."
+  },
+  {
+    "start": 67.2,
+    "end": 72.1,
+    "text": "The calendar shows the replacement date, with the original history preserved."
+  },
+  {
+    "start": 72.5,
+    "end": 77.4,
+    "text": "Accepted commitments and open questions stay separate, with evidence."
+  },
+  {
+    "start": 77.8,
+    "end": 82.0,
+    "text": "Approve before sharing. Nothing is sent automatically."
+  },
+  {
+    "start": 82.5,
+    "end": 116.5,
+    "text": "This demonstration ends with five active approved tasks, one accepted responsibility, and two source imports. A model suggestion to cancel transport was rejected because its quote did not support that change. Exact evidence still needs human judgment. This is a local prototype for fictional data, not medical advice or a production household service. The payoff is less reconstructing the chat, and a clearer place to start the next conversation. CareRelay. A little less to carry."
+  }
+]

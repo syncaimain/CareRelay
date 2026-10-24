@@ -1,0 +1,14 @@
+{
+  "repo": "hexgrad/Kokoro-82M",
+  "device": "cpu",
+  "torch": "2.13.0+cpu",
+  "sample_rate": 24000,
+  "preview_voices": [
+    "af_heart",
+    "bf_emma",
+    "am_michael"
+  ],
+  "final_voice_selected": true,
+  "final_voice": "am_fenrir",
+  "selection_basis": "User delegated a non-common/non-default voice choice; no popularity measurement claimed."
+}

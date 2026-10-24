@@ -1,0 +1,68 @@
+{
+  "synthetic": true,
+  "baseURL": "http://127.0.0.1:3104",
+  "seconds": 115.01,
+  "timeline": [
+    {
+      "name": "The family coordination burden",
+      "seconds": 0.81
+    },
+    {
+      "name": "Four fictional caregivers",
+      "seconds": 6.2
+    },
+    {
+      "name": "Original messages and missing return ride",
+      "seconds": 11.26
+    },
+    {
+      "name": "Real local model processing",
+      "seconds": 17.29
+    },
+    {
+      "name": "Source-linked suggestions",
+      "seconds": 26.82
+    },
+    {
+      "name": "Approved plan: travel is still unclaimed",
+      "seconds": 40.61
+    },
+    {
+      "name": "Robin explicitly accepts her own responsibility",
+      "seconds": 47.05
+    },
+    {
+      "name": "A real reschedule notice",
+      "seconds": 51.72
+    },
+    {
+      "name": "Replacement date, with history preserved",
+      "seconds": 67.11
+    },
+    {
+      "name": "Accepted commitments and unresolved questions",
+      "seconds": 72.44
+    },
+    {
+      "name": "Human approval before manual sharing",
+      "seconds": 77.72
+    },
+    {
+      "name": "The whole plan, in one place",
+      "seconds": 82.23
+    }
+  ],
+  "pageErrors": [],
+  "approvedTasks": 5,
+  "acceptedTasks": 1,
+  "supersededTaskCancelled": true,
+  "sourceCount": 2,
+  "video_codec": "h264",
+  "width": 1920,
+  "height": 1080,
+  "mp4_seconds": 118.8,
+  "size_bytes": 4001233,
+  "full_decode_passed": true,
+  "video_path": "demo/assets/video/demo_silent.mp4",
+  "ui_theme": "white/slate with teal accents and sans-serif typography"
+}

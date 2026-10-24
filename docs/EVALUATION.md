@@ -1,0 +1,40 @@
+# Evaluation status
+
+Development environment: Windows, Python 3.12.7, Node 22.14.0, NVIDIA RTX 4090 with 24,564 MiB VRAM. Selected model: `ministral-3:14b` (Apache 2.0). Model download/inference status is recorded separately in `model-verification.json` when available.
+
+## Completed checks
+
+- **Genuine Ministral 3 14B extraction passed** in 5.663 seconds including initial load/metadata queries. It extracted the synthetic transport task with an exact source quote, correct caregiver, location and timezone-aware timestamp. This is a smoke check, not an accuracy benchmark. Ollama 0.40.8; model quantization Q4_K_M; 9,082,537,546 bytes; full digest and output in `model-verification.json`. Ollama's download integrity verification completed successfully.
+- **A repeated real inference exposed timezone drift**: the model used UTC rather than the source reference's +05:00. The validator now clears a mismatched model timezone and requires manual date/time confirmation. A regression test covers this failure. The subsequent genuine API journey passed in 4.36 seconds, including source import, extraction, human date correction, approval, caregiver acceptance and a source-linked handoff approved against current task versions (`api-smoke-results.json`). Its `extracted_due_timestamp_correct=false` is preserved; no automatic extraction accuracy is claimed from that workflow.
+- **19/19 deterministic backend tests passed**, in 22.60 seconds. These use synthetic model fixtures only inside tests. They cover token authentication, full approval/consent/completion, duplicate imports, atomic quote rejection, author-only private sources/jobs/audit, circle boundaries, review permissions, assignment ownership, uncertainty acknowledgement, review version conflicts, availability overlap, rescheduling/consent reset, evidence-linked handoff snapshots, timezone/owner validation, permission revocation, disabled demo setup, cancellation history, private-change isolation, foreign-owner/model-reference rejection and model timezone drift.
+- **TypeScript `tsc --noEmit` passed.**
+- **Full Next.js production build passed**, including TypeScript, static generation and page optimization. The revised white/slate/teal UI is served at `http://127.0.0.1:3104`.
+
+## Browser and environment verification
+
+- Initial `spawn EPERM` restrictions were resolved when the session permissions changed.
+- Windows reserves the ranges 7909–8008 and 8674–8773 on this machine. This explains the earlier socket errors on ports 8000 and 8765; they were not solely sandbox failures. CareRelay now uses backend 8104 and frontend 3104. Existing services belonging to another project were left untouched.
+- **The real Chromium end-to-end journey passed** in approximately 1.3 minutes: synthetic circle creation, genuine Ollama extraction, evidence review with explicit date confirmation, approval, caregiver consent, grounded handoff generation and human approval before copying.
+- Actual desktop (1440×1000) and mobile (390×844) screenshots were captured and visually inspected. No page errors or horizontal mobile overflow were detected (`ui-inspection.json`). Screenshots were regenerated after the requested modern UI redesign.
+- The demo recording script additionally verifies an actual reschedule against the original record, checks that it becomes cancelled, switches caregiver profiles for personal consent, and preserves unresolved travel. Final recording metadata is saved only when the whole workflow succeeds.
+- **The full recorded journey succeeded**: 5 active approved tasks, 1 accepted responsibility, 2 actual source imports, and the original appointment marked cancelled. No browser page errors occurred. The H.264 MP4 is 1920×1080, 118.8 seconds, 4,001,233 bytes, and passed a complete FFmpeg decode. `demo-recording.json` contains the actual event timeline. The model also suggested an unsupported ride cancellation from a request to check transport; that suggestion was rejected rather than applied. Exact quotes do not establish semantic correctness.
+- After the requested UI redesign, the production Chromium import/review/consent/handoff test passed again in 7.7 seconds. The original 1.3-minute run included a cold-model wait; these are individual runs rather than a latency benchmark.
+- Final narration used genuine Kokoro-82M `am_fenrir` on CPU, selected under the user's direction to use a non-default voice. Twelve speech segments were fitted to the actual demo timeline; eleven needed no tempo change and one needed approximately 1.022×. The WAV is 24 kHz with peak 0.860 and zero clipped samples. Final MP4 streams are 1920×1080 H.264, 48 kHz mono AAC and English `mov_text` subtitles; duration 108.08 seconds. The unused closing hold was trimmed after the speech ended at 105.904 seconds. Full FFmpeg decoding passed. This is phrase-level caption timing, not forced word alignment.
+
+## Reproducible real-model evaluation
+
+The full 32-message baseline completed: **77.8% strict category precision and recall** (21 true positives, 6 false positives and 6 false negatives), in 121.147 seconds. The complete original report is preserved in `evaluation-baseline.json`.
+
+After clarifying action-based categories and the source timezone in the prompt, a second full run measured **92.9% precision and 96.3% recall** (26 true positives, 2 false positives, 1 false negative), in 59.206 seconds. Owner attribution was 11/12, explicit timestamps 21/22, and cancellation/rescheduling operations 3/3. All returned quotes passed source validation; no inference jobs failed. See `evaluation-results.json`, which includes raw model fields, validated fields, model name and hashes of the dataset and AI code.
+
+**This is a development set used to refine the prompt, not held-out accuracy or evidence of generalization.** One remaining category disagreement is whether collecting groceries should be a pickup or an errand. The original errand reference label has been retained so it is not silently changed after seeing predictions. The other error is an extra obligation extracted from an availability caveat. Human review remains necessary.
+
+The second report uses scoring version 2: owner and date fields are scored independently of category correctness, and missing/failed predictions stay in each applicable metric's denominator. The original baseline's field scores used category-dependent matching, so its owner/date summary is not directly comparable. Strict category precision and recall use the same method in both reports.
+
+After adding category correction and evaluation regression coverage, **23/23 backend/evaluation tests passed in 20.84 seconds**, and TypeScript checking passed again. Reviewers can now correct a model's category as well as its date, owner, title, location and uncertainty.
+
+`python scripts/model_smoke.py` requires the downloaded model and running Ollama. `python scripts/evaluate.py` measures extraction over `demo/dataset.json`, writing actual results to `docs/evaluation-results.json`. `--limit N` supports an explicitly partial evaluation.
+
+The corpus has 32 fictional messages spanning two weeks and more than ten annotated coordination problems. Kind-level micro precision/recall is strict: alternate categories count as errors even when semantically defensible. Each source has at most one labeled obligation. Source attribution is validated using an exact contiguous quote and source ID; this verifies evidence provenance, not the correctness of every inferred field. Owner attribution and explicit timestamps are reported separately. Cancellation/rescheduling examples run without prior tasks in this extraction-only evaluation, so relationship resolution is tested separately in backend tests and the demo workflow.
+
+There are no measured household time savings, usability trials, clinical outcomes or production reliability claims. Synthetic coordination examples are not live-family trials. Do not publish accuracy numbers until a genuine evaluation report exists.

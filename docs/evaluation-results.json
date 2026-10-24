@@ -1,0 +1,1145 @@
+{
+  "model": "ministral-3:14b",
+  "synthetic": true,
+  "dataset_use": "development set; prompt tuned after baseline",
+  "dataset_sha256": "5183d68eca9c663685bca34a457acfb474c33a9103696f36c5bcc8282c5a3831",
+  "ai_code_sha256": "d6e1e39fef2b86a5c84fe6431e62a630ef67e46dd7d409668265c5d1edc772d2",
+  "scoring_version": 2,
+  "measured_at": "2026-10-24T18:31:42.025360+05:00",
+  "messages": 32,
+  "precision": 0.9285714285714286,
+  "recall": 0.9629629629629629,
+  "true_positives": 26,
+  "false_positives": 2,
+  "false_negatives": 1,
+  "owner_attribution": {
+    "correct": 11,
+    "total": 12
+  },
+  "explicit_timestamps": {
+    "correct": 21,
+    "total": 22
+  },
+  "change_operations": {
+    "correct": 3,
+    "total": 3
+  },
+  "failed_messages": 0,
+  "total_seconds": 59.206,
+  "results": [
+    {
+      "id": "m01",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "owner_correct": null,
+      "date_correct": true,
+      "change_correct": null,
+      "quote_verified": true,
+      "seconds": 2.44,
+      "raw_items": [
+        {
+          "source_id": 1,
+          "quote": "Confirm the clinic appointment on 2026-10-26 at 10:00 at Oak Clinic.",
+          "title": "Confirm clinic appointment",
+          "kind": "confirmation",
+          "due_at": "2026-10-26T10:00:00+05:00",
+          "owner": null,
+          "location": "Oak Clinic",
+          "uncertainty": null,
+          "change": "new",
+          "related_task_id": null
+        }
+      ],
+      "items": [
+        {
+          "title": "Confirm clinic appointment",
+          "kind": "confirmation",
+          "quote": "Confirm the clinic appointment on 2026-10-26 at 10:00 at Oak Clinic.",
+          "due_at": "2026-10-26T10:00:00+05:00",
+          "owner_id": null,
+          "location": "Oak Clinic",
+          "uncertainty": "Confirm the model-interpreted date and time against the source.",
+          "change_type": "new",
+          "related_task_id": null
+        }
+      ]
+    },
+    {
+      "id": "m02",
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "owner_correct": false,
+      "date_correct": false,
+      "change_correct": null,
+      "quote_verified": true,
+      "seconds": 3.146,
+      "raw_items": [
+        {
+          "source_id": 2,
+          "quote": "Maya will drive to Oak Clinic on 2026-10-26 at 09:00",
+          "title": "Transport to Oak Clinic",
+          "kind": "transport",
+          "due_at": "2026-10-26T09:00:00+05:00",
+          "owner": "Maya",
+          "location": "Oak Clinic",
+          "uncertainty": "Tentative due to caregiver's work shift conflict",
+          "change": "new",
+          "related_task_id": null
+        },
+        {
+          "source_id": 2,
+          "quote": "please check",
+          "title": "Confirm Transport Availability",
+          "kind": "confirmation",
+          "due_at": null,
+          "owner": null,
+          "location": "Oak Clinic",
+          "uncertainty": "No specific time or details provided; depends on caregiver's availability",
+          "change": "new",
+          "related_task_id": null
+        }
+      ],
+      "items": [
+        {
+          "title": "Transport to Oak Clinic",
+          "kind": "transport",
+          "quote": "Maya will drive to Oak Clinic on 2026-10-26 at 09:00",
+          "due_at": "2026-10-26T09:00:00+05:00",
+          "owner_id": 2,
+          "location": "Oak Clinic",
+          "uncertainty": "Tentative due to caregiver's work shift conflict Confirm the model-interpreted date and time against the source.",
+          "change_type": "new",
+          "related_task_id": null
+        },
+        {
+          "title": "Confirm Transport Availability",
+          "kind": "confirmation",
+          "quote": "please check",
+          "due_at": null,
+          "owner_id": null,
+          "location": "Oak Clinic",
+          "uncertainty": "No specific time or details provided; depends on caregiver's availability Date or time is unresolved.",
+          "change_type": "new",
+          "related_task_id": null
+        }
+      ]
+    },
+    {
+      "id": "m03",
+      "tp": 0,
+      "fp": 1,
+      "fn": 1,
+      "owner_correct": null,
+      "date_correct": true,
+      "change_correct": null,
+      "quote_verified": true,
+      "seconds": 1.981,
+      "raw_items": [
+        {
+          "source_id": 3,
+          "quote": "collect groceries from Green Market on 2026-10-26 at 11:00",
+          "title": "Collect groceries from Green Market",
+          "kind": "pickup",
+          "due_at": "2026-10-26T11:00:00+05:00",
+          "owner": null,
+          "location": "Green Market",
+          "uncertainty": null,
+          "change": "new",
+          "related_task_id": null
+        }
+      ],
+      "items": [
+        {
+          "title": "Collect groceries from Green Market",
+          "kind": "pickup",
+          "quote": "collect groceries from Green Market on 2026-10-26 at 11:00",
+          "due_at": "2026-10-26T11:00:00+05:00",
+          "owner_id": null,
+          "location": "Green Market",
+          "uncertainty": "Confirm the model-interpreted date and time against the source.",
+          "change_type": "new",
+          "related_task_id": null
+        }
+      ]
+    },
+    {
+      "id": "m04",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "owner_correct": true,
+      "date_correct": true,
+      "change_correct": null,
+      "quote_verified": true,
+      "seconds": 1.862,
+      "raw_items": [
+        {
+          "source_id": 4,
+          "quote": "Robin will pick up the library books on 2026-10-27 at 15:00 at Elm Library.",
+          "title": "Pick up library books",
+          "kind": "pickup",
+          "due_at": "2026-10-27T15:00:00+05:00",
+          "owner": "Robin",
+          "location": "Elm Library",
+          "uncertainty": null,
+          "change": "new",
+          "related_task_id": null
+        }
+      ],
+      "items": [
+        {
+          "title": "Pick up library books",
+          "kind": "pickup",
+          "quote": "Robin will pick up the library books on 2026-10-27 at 15:00 at Elm Library.",
+          "due_at": "2026-10-27T15:00:00+05:00",
+          "owner_id": 4,
+          "location": "Elm Library",
+          "uncertainty": "Confirm the model-interpreted date and time against the source.",
+          "change_type": "new",
+          "related_task_id": null
+        }
+      ]
+    },
+    {
+      "id": "m05",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "owner_correct": null,
+      "date_correct": true,
+      "change_correct": null,
+      "quote_verified": true,
+      "seconds": 2.076,
+      "raw_items": [
+        {
+          "source_id": 5,
+          "quote": "We still need a return ride from Oak Clinic on 2026-10-26 at 11:00.",
+          "title": "Unconfirmed return ride from Oak Clinic",
+          "kind": "transport",
+          "due_at": "2026-10-26T11:00:00+05:00",
+          "owner": null,
+          "location": "Oak Clinic",
+          "uncertainty": "No driver confirmed",
+          "change": "new",
+          "related_task_id": null
+        }
+      ],
+      "items": [
+        {
+          "title": "Unconfirmed return ride from Oak Clinic",
+          "kind": "transport",
+          "quote": "We still need a return ride from Oak Clinic on 2026-10-26 at 11:00.",
+          "due_at": "2026-10-26T11:00:00+05:00",
+          "owner_id": null,
+          "location": "Oak Clinic",
+          "uncertainty": "No driver confirmed Confirm the model-interpreted date and time against the source.",
+          "change_type": "new",
+          "related_task_id": null
+        }
+      ]
+    },
+    {
+      "id": "m06",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "owner_correct": null,
+      "date_correct": null,
+      "change_correct": null,
+      "quote_verified": true,
+      "seconds": 0.352,
+      "raw_items": [],
+      "items": []
+    },
+    {
+      "id": "m07",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "owner_correct": null,
+      "date_correct": null,
+      "change_correct": true,
+      "quote_verified": true,
+      "seconds": 2.482,
+      "raw_items": [
+        {
+          "source_id": 7,
+          "quote": "The clinic appointment at Oak Clinic on 2026-10-26 at 10:00 has moved to 2026-10-27 at 10:30.",
+          "title": "Clinic appointment rescheduled",
+          "kind": "appointment",
+          "due_at": "2026-10-27T10:30:00+05:00",
+          "owner": null,
+          "location": "Oak Clinic",
+          "uncertainty": "Reschedule without a matching existing task; related_task_id=null",
+          "change": "reschedule",
+          "related_task_id": null
+        }
+      ],
+      "items": [
+        {
+          "title": "Clinic appointment rescheduled",
+          "kind": "appointment",
+          "quote": "The clinic appointment at Oak Clinic on 2026-10-26 at 10:00 has moved to 2026-10-27 at 10:30.",
+          "due_at": "2026-10-27T10:30:00+05:00",
+          "owner_id": null,
+          "location": "Oak Clinic",
+          "uncertainty": "Reschedule without a matching existing task; related_task_id=null Confirm the model-interpreted date and time against the source. Select the original approved task before applying this change.",
+          "change_type": "reschedule",
+          "related_task_id": null
+        }
+      ]
+    },
+    {
+      "id": "m08",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "owner_correct": null,
+      "date_correct": null,
+      "change_correct": true,
+      "quote_verified": true,
+      "seconds": 2.04,
+      "raw_items": [
+        {
+          "source_id": 8,
+          "quote": "Cancel the original ride to Oak Clinic on 2026-10-26 at 09:00.",
+          "title": "Cancel transport to Oak Clinic",
+          "kind": "transport",
+          "due_at": "2026-10-26T09:00:00+05:00",
+          "owner": null,
+          "location": null,
+          "uncertainty": null,
+          "change": "cancel",
+          "related_task_id": null
+        }
+      ],
+      "items": [
+        {
+          "title": "Cancel transport to Oak Clinic",
+          "kind": "transport",
+          "quote": "Cancel the original ride to Oak Clinic on 2026-10-26 at 09:00.",
+          "due_at": "2026-10-26T09:00:00+05:00",
+          "owner_id": null,
+          "location": "",
+          "uncertainty": "Confirm the model-interpreted date and time against the source. Select the original approved task before applying this change.",
+          "change_type": "cancel",
+          "related_task_id": null
+        }
+      ]
+    },
+    {
+      "id": "m09",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "owner_correct": null,
+      "date_correct": true,
+      "change_correct": null,
+      "quote_verified": true,
+      "seconds": 2.102,
+      "raw_items": [
+        {
+          "source_id": 9,
+          "quote": "Can someone book transport to Oak Clinic on 2026-10-27 at 09:30?",
+          "title": "Request transport to Oak Clinic",
+          "kind": "transport",
+          "due_at": "2026-10-27T09:30:00+05:00",
+          "owner": null,
+          "location": "Oak Clinic",
+          "uncertainty": "Tentative request; no confirmed caregiver or booking details.",
+          "change": "new",
+          "related_task_id": null
+        }
+      ],
+      "items": [
+        {
+          "title": "Request transport to Oak Clinic",
+          "kind": "transport",
+          "quote": "Can someone book transport to Oak Clinic on 2026-10-27 at 09:30?",
+          "due_at": "2026-10-27T09:30:00+05:00",
+          "owner_id": null,
+          "location": "Oak Clinic",
+          "uncertainty": "Tentative request; no confirmed caregiver or booking details. Confirm the model-interpreted date and time against the source.",
+          "change_type": "new",
+          "related_task_id": null
+        }
+      ]
+    },
+    {
+      "id": "m10",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "owner_correct": true,
+      "date_correct": true,
+      "change_correct": null,
+      "quote_verified": true,
+      "seconds": 1.85,
+      "raw_items": [
+        {
+          "source_id": 10,
+          "quote": "Alex will collect the parcel at Post House on 2026-10-28 at 16:00.",
+          "title": "Parcel pickup by Alex",
+          "kind": "pickup",
+          "due_at": "2026-10-28T16:00:00+05:00",
+          "owner": "Alex",
+          "location": "Post House",
+          "uncertainty": null,
+          "change": "new",
+          "related_task_id": null
+        }
+      ],
+      "items": [
+        {
+          "title": "Parcel pickup by Alex",
+          "kind": "pickup",
+          "quote": "Alex will collect the parcel at Post House on 2026-10-28 at 16:00.",
+          "due_at": "2026-10-28T16:00:00+05:00",
+          "owner_id": 1,
+          "location": "Post House",
+          "uncertainty": "Confirm the model-interpreted date and time against the source.",
+          "change_type": "new",
+          "related_task_id": null
+        }
+      ]
+    },
+    {
+      "id": "m11",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "owner_correct": true,
+      "date_correct": true,
+      "change_correct": null,
+      "quote_verified": true,
+      "seconds": 1.962,
+      "raw_items": [
+        {
+          "source_id": 11,
+          "quote": "Alex will buy groceries at Green Market on 2026-10-28 at 16:30.",
+          "title": "Alex to buy groceries at Green Market",
+          "kind": "errand",
+          "due_at": "2026-10-28T16:30:00+05:00",
+          "owner": "Alex",
+          "location": "Green Market",
+          "uncertainty": null,
+          "change": "new",
+          "related_task_id": null
+        }
+      ],
+      "items": [
+        {
+          "title": "Alex to buy groceries at Green Market",
+          "kind": "errand",
+          "quote": "Alex will buy groceries at Green Market on 2026-10-28 at 16:30.",
+          "due_at": "2026-10-28T16:30:00+05:00",
+          "owner_id": 1,
+          "location": "Green Market",
+          "uncertainty": "Confirm the model-interpreted date and time against the source.",
+          "change_type": "new",
+          "related_task_id": null
+        }
+      ]
+    },
+    {
+      "id": "m12",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "owner_correct": null,
+      "date_correct": null,
+      "change_correct": null,
+      "quote_verified": true,
+      "seconds": 0.362,
+      "raw_items": [],
+      "items": []
+    },
+    {
+      "id": "m13",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "owner_correct": null,
+      "date_correct": null,
+      "change_correct": null,
+      "quote_verified": true,
+      "seconds": 2.039,
+      "raw_items": [
+        {
+          "source_id": 13,
+          "quote": "Please arrange a ride next Friday, but I do not know the time yet.",
+          "title": "Arrange transport for next Friday (time uncertain)",
+          "kind": "transport",
+          "due_at": "2026-10-31T00:00:00+05:00",
+          "owner": null,
+          "location": null,
+          "uncertainty": "Time of day not specified",
+          "change": "new",
+          "related_task_id": null
+        }
+      ],
+      "items": [
+        {
+          "title": "Arrange transport for next Friday (time uncertain)",
+          "kind": "transport",
+          "quote": "Please arrange a ride next Friday, but I do not know the time yet.",
+          "due_at": "2026-10-31T00:00:00+05:00",
+          "owner_id": null,
+          "location": "",
+          "uncertainty": "Time of day not specified Confirm the model-interpreted date and time against the source.",
+          "change_type": "new",
+          "related_task_id": null
+        }
+      ]
+    },
+    {
+      "id": "m14",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "owner_correct": true,
+      "date_correct": true,
+      "change_correct": null,
+      "quote_verified": true,
+      "seconds": 2.13,
+      "raw_items": [
+        {
+          "source_id": 14,
+          "quote": "Sam will confirm the community appointment by phone on 2026-10-29 at 14:00.",
+          "title": "Confirm community appointment by phone",
+          "kind": "confirmation",
+          "due_at": "2026-10-29T14:00:00+05:00",
+          "owner": "Sam",
+          "location": null,
+          "uncertainty": null,
+          "change": "new",
+          "related_task_id": null
+        }
+      ],
+      "items": [
+        {
+          "title": "Confirm community appointment by phone",
+          "kind": "confirmation",
+          "quote": "Sam will confirm the community appointment by phone on 2026-10-29 at 14:00.",
+          "due_at": "2026-10-29T14:00:00+05:00",
+          "owner_id": 3,
+          "location": "",
+          "uncertainty": "Confirm the model-interpreted date and time against the source.",
+          "change_type": "new",
+          "related_task_id": null
+        }
+      ]
+    },
+    {
+      "id": "m15",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "owner_correct": true,
+      "date_correct": true,
+      "change_correct": null,
+      "quote_verified": true,
+      "seconds": 2.297,
+      "raw_items": [
+        {
+          "source_id": 15,
+          "quote": "Robin might collect the shopping on 2026-10-30 at 17:00; this is a tentative offer.",
+          "title": "Tentative shopping pickup by Robin",
+          "kind": "pickup",
+          "due_at": "2026-10-30T17:00:00+05:00",
+          "owner": "Robin",
+          "location": null,
+          "uncertainty": "Tentative offer; details may change or be declined.",
+          "change": "new",
+          "related_task_id": null
+        }
+      ],
+      "items": [
+        {
+          "title": "Tentative shopping pickup by Robin",
+          "kind": "pickup",
+          "quote": "Robin might collect the shopping on 2026-10-30 at 17:00; this is a tentative offer.",
+          "due_at": "2026-10-30T17:00:00+05:00",
+          "owner_id": 4,
+          "location": "",
+          "uncertainty": "Tentative offer; details may change or be declined. Confirm the model-interpreted date and time against the source.",
+          "change_type": "new",
+          "related_task_id": null
+        }
+      ]
+    },
+    {
+      "id": "m16",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "owner_correct": null,
+      "date_correct": null,
+      "change_correct": null,
+      "quote_verified": true,
+      "seconds": 0.345,
+      "raw_items": [],
+      "items": []
+    },
+    {
+      "id": "m17",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "owner_correct": null,
+      "date_correct": true,
+      "change_correct": null,
+      "quote_verified": true,
+      "seconds": 2.07,
+      "raw_items": [
+        {
+          "source_id": 17,
+          "quote": "The optician appointment is on 2026-10-30 at 10:00 at River Optics.",
+          "title": "Optician appointment",
+          "kind": "appointment",
+          "due_at": "2026-10-30T10:00:00+05:00",
+          "owner": null,
+          "location": "River Optics",
+          "uncertainty": null,
+          "change": "new",
+          "related_task_id": null
+        }
+      ],
+      "items": [
+        {
+          "title": "Optician appointment",
+          "kind": "appointment",
+          "quote": "The optician appointment is on 2026-10-30 at 10:00 at River Optics.",
+          "due_at": "2026-10-30T10:00:00+05:00",
+          "owner_id": null,
+          "location": "River Optics",
+          "uncertainty": "Confirm the model-interpreted date and time against the source.",
+          "change_type": "new",
+          "related_task_id": null
+        }
+      ]
+    },
+    {
+      "id": "m18",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "owner_correct": null,
+      "date_correct": true,
+      "change_correct": null,
+      "quote_verified": true,
+      "seconds": 2.16,
+      "raw_items": [
+        {
+          "source_id": 18,
+          "quote": "A return ride from River Optics is needed on 2026-10-30 at 11:00.",
+          "title": "Transport: Return ride from River Optics",
+          "kind": "transport",
+          "due_at": "2026-10-30T11:00:00+05:00",
+          "owner": null,
+          "location": "River Optics",
+          "uncertainty": "No caregiver or driver assigned; details may be incomplete.",
+          "change": "new",
+          "related_task_id": null
+        }
+      ],
+      "items": [
+        {
+          "title": "Transport: Return ride from River Optics",
+          "kind": "transport",
+          "quote": "A return ride from River Optics is needed on 2026-10-30 at 11:00.",
+          "due_at": "2026-10-30T11:00:00+05:00",
+          "owner_id": null,
+          "location": "River Optics",
+          "uncertainty": "No caregiver or driver assigned; details may be incomplete. Confirm the model-interpreted date and time against the source.",
+          "change_type": "new",
+          "related_task_id": null
+        }
+      ]
+    },
+    {
+      "id": "m19",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "owner_correct": true,
+      "date_correct": true,
+      "change_correct": null,
+      "quote_verified": true,
+      "seconds": 1.993,
+      "raw_items": [
+        {
+          "source_id": 19,
+          "quote": "Maya will pick up the laundry from Cedar Cleaners on 2026-10-31 at 12:00.",
+          "title": "Pick up laundry from Cedar Cleaners",
+          "kind": "pickup",
+          "due_at": "2026-10-31T12:00:00+05:00",
+          "owner": "Maya",
+          "location": "Cedar Cleaners",
+          "uncertainty": null,
+          "change": "new",
+          "related_task_id": null
+        }
+      ],
+      "items": [
+        {
+          "title": "Pick up laundry from Cedar Cleaners",
+          "kind": "pickup",
+          "quote": "Maya will pick up the laundry from Cedar Cleaners on 2026-10-31 at 12:00.",
+          "due_at": "2026-10-31T12:00:00+05:00",
+          "owner_id": 2,
+          "location": "Cedar Cleaners",
+          "uncertainty": "Confirm the model-interpreted date and time against the source.",
+          "change_type": "new",
+          "related_task_id": null
+        }
+      ]
+    },
+    {
+      "id": "m20",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "owner_correct": null,
+      "date_correct": null,
+      "change_correct": null,
+      "quote_verified": true,
+      "seconds": 1.749,
+      "raw_items": [
+        {
+          "source_id": 20,
+          "quote": "Please collect the repaired walker, date still to be confirmed.",
+          "title": "Pickup of repaired walker (date pending)",
+          "kind": "pickup",
+          "due_at": null,
+          "owner": null,
+          "location": null,
+          "uncertainty": "Date not yet confirmed",
+          "change": "new",
+          "related_task_id": null
+        }
+      ],
+      "items": [
+        {
+          "title": "Pickup of repaired walker (date pending)",
+          "kind": "pickup",
+          "quote": "Please collect the repaired walker, date still to be confirmed.",
+          "due_at": null,
+          "owner_id": null,
+          "location": "",
+          "uncertainty": "Date not yet confirmed Date or time is unresolved.",
+          "change_type": "new",
+          "related_task_id": null
+        }
+      ]
+    },
+    {
+      "id": "m21",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "owner_correct": true,
+      "date_correct": true,
+      "change_correct": null,
+      "quote_verified": true,
+      "seconds": 2.153,
+      "raw_items": [
+        {
+          "source_id": 21,
+          "quote": "Alex will buy household supplies at Green Market on 2026-11-01 at 10:00.",
+          "title": "Alex to buy household supplies at Green Market",
+          "kind": "errand",
+          "due_at": "2026-11-01T10:00:00+05:00",
+          "owner": "Alex",
+          "location": "Green Market",
+          "uncertainty": null,
+          "change": "new",
+          "related_task_id": null
+        }
+      ],
+      "items": [
+        {
+          "title": "Alex to buy household supplies at Green Market",
+          "kind": "errand",
+          "quote": "Alex will buy household supplies at Green Market on 2026-11-01 at 10:00.",
+          "due_at": "2026-11-01T10:00:00+05:00",
+          "owner_id": 1,
+          "location": "Green Market",
+          "uncertainty": "Confirm the model-interpreted date and time against the source.",
+          "change_type": "new",
+          "related_task_id": null
+        }
+      ]
+    },
+    {
+      "id": "m22",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "owner_correct": null,
+      "date_correct": true,
+      "change_correct": null,
+      "quote_verified": true,
+      "seconds": 2.675,
+      "raw_items": [
+        {
+          "source_id": 22,
+          "quote": "The community appointment is on 2026-11-02 at 09:00 at Elm Centre.",
+          "title": "Community appointment at Elm Centre",
+          "kind": "appointment",
+          "due_at": "2026-11-02T09:00:00+05:00",
+          "owner": null,
+          "location": "Elm Centre",
+          "uncertainty": null,
+          "change": "new",
+          "related_task_id": null
+        }
+      ],
+      "items": [
+        {
+          "title": "Community appointment at Elm Centre",
+          "kind": "appointment",
+          "quote": "The community appointment is on 2026-11-02 at 09:00 at Elm Centre.",
+          "due_at": "2026-11-02T09:00:00+05:00",
+          "owner_id": null,
+          "location": "Elm Centre",
+          "uncertainty": "Confirm the model-interpreted date and time against the source.",
+          "change_type": "new",
+          "related_task_id": null
+        }
+      ]
+    },
+    {
+      "id": "m23",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "owner_correct": null,
+      "date_correct": true,
+      "change_correct": null,
+      "quote_verified": true,
+      "seconds": 1.998,
+      "raw_items": [
+        {
+          "source_id": 23,
+          "quote": "Nobody has volunteered to drive to Elm Centre on 2026-11-02 at 08:00.",
+          "title": "Unassigned transport to Elm Centre",
+          "kind": "transport",
+          "due_at": "2026-11-02T08:00:00+05:00",
+          "owner": null,
+          "location": "Elm Centre",
+          "uncertainty": "No caregiver has been assigned or volunteered for this task.",
+          "change": "new",
+          "related_task_id": null
+        }
+      ],
+      "items": [
+        {
+          "title": "Unassigned transport to Elm Centre",
+          "kind": "transport",
+          "quote": "Nobody has volunteered to drive to Elm Centre on 2026-11-02 at 08:00.",
+          "due_at": "2026-11-02T08:00:00+05:00",
+          "owner_id": null,
+          "location": "Elm Centre",
+          "uncertainty": "No caregiver has been assigned or volunteered for this task. Confirm the model-interpreted date and time against the source.",
+          "change_type": "new",
+          "related_task_id": null
+        }
+      ]
+    },
+    {
+      "id": "m24",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "owner_correct": true,
+      "date_correct": true,
+      "change_correct": null,
+      "quote_verified": true,
+      "seconds": 1.882,
+      "raw_items": [
+        {
+          "source_id": 24,
+          "quote": "Sam will return the library books at Elm Library on 2026-11-02 at 15:00.",
+          "title": "Return library books",
+          "kind": "errand",
+          "due_at": "2026-11-02T15:00:00+05:00",
+          "owner": "Sam",
+          "location": "Elm Library",
+          "uncertainty": null,
+          "change": "new",
+          "related_task_id": null
+        }
+      ],
+      "items": [
+        {
+          "title": "Return library books",
+          "kind": "errand",
+          "quote": "Sam will return the library books at Elm Library on 2026-11-02 at 15:00.",
+          "due_at": "2026-11-02T15:00:00+05:00",
+          "owner_id": 3,
+          "location": "Elm Library",
+          "uncertainty": "Confirm the model-interpreted date and time against the source.",
+          "change_type": "new",
+          "related_task_id": null
+        }
+      ]
+    },
+    {
+      "id": "m25",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "owner_correct": null,
+      "date_correct": null,
+      "change_correct": null,
+      "quote_verified": true,
+      "seconds": 0.347,
+      "raw_items": [],
+      "items": []
+    },
+    {
+      "id": "m26",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "owner_correct": null,
+      "date_correct": null,
+      "change_correct": true,
+      "quote_verified": true,
+      "seconds": 2.078,
+      "raw_items": [
+        {
+          "source_id": 26,
+          "quote": "Cancel the optician appointment at River Optics on 2026-10-30 at 10:00.",
+          "title": "Cancel optician appointment at River Optics",
+          "kind": "appointment",
+          "due_at": "2026-10-30T10:00:00+05:00",
+          "owner": null,
+          "location": "River Optics",
+          "uncertainty": null,
+          "change": "cancel",
+          "related_task_id": null
+        }
+      ],
+      "items": [
+        {
+          "title": "Cancel optician appointment at River Optics",
+          "kind": "appointment",
+          "quote": "Cancel the optician appointment at River Optics on 2026-10-30 at 10:00.",
+          "due_at": "2026-10-30T10:00:00+05:00",
+          "owner_id": null,
+          "location": "River Optics",
+          "uncertainty": "Confirm the model-interpreted date and time against the source. Select the original approved task before applying this change.",
+          "change_type": "cancel",
+          "related_task_id": null
+        }
+      ]
+    },
+    {
+      "id": "m27",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "owner_correct": true,
+      "date_correct": true,
+      "change_correct": null,
+      "quote_verified": true,
+      "seconds": 2.072,
+      "raw_items": [
+        {
+          "source_id": 27,
+          "quote": "Robin will confirm the dentist appointment on 2026-11-03 at 13:00 by phone.",
+          "title": "Confirm dentist appointment",
+          "kind": "confirmation",
+          "due_at": "2026-11-03T13:00:00+05:00",
+          "owner": "Robin",
+          "location": null,
+          "uncertainty": null,
+          "change": "new",
+          "related_task_id": null
+        }
+      ],
+      "items": [
+        {
+          "title": "Confirm dentist appointment",
+          "kind": "confirmation",
+          "quote": "Robin will confirm the dentist appointment on 2026-11-03 at 13:00 by phone.",
+          "due_at": "2026-11-03T13:00:00+05:00",
+          "owner_id": 4,
+          "location": "",
+          "uncertainty": "Confirm the model-interpreted date and time against the source.",
+          "change_type": "new",
+          "related_task_id": null
+        }
+      ]
+    },
+    {
+      "id": "m28",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "owner_correct": null,
+      "date_correct": true,
+      "change_correct": null,
+      "quote_verified": true,
+      "seconds": 2.044,
+      "raw_items": [
+        {
+          "source_id": 28,
+          "quote": "The dentist appointment is on 2026-11-04 at 14:00 at Cedar Dental.",
+          "title": "Dentist appointment",
+          "kind": "appointment",
+          "due_at": "2026-11-04T14:00:00+05:00",
+          "owner": null,
+          "location": "Cedar Dental",
+          "uncertainty": null,
+          "change": "new",
+          "related_task_id": null
+        }
+      ],
+      "items": [
+        {
+          "title": "Dentist appointment",
+          "kind": "appointment",
+          "quote": "The dentist appointment is on 2026-11-04 at 14:00 at Cedar Dental.",
+          "due_at": "2026-11-04T14:00:00+05:00",
+          "owner_id": null,
+          "location": "Cedar Dental",
+          "uncertainty": "Confirm the model-interpreted date and time against the source.",
+          "change_type": "new",
+          "related_task_id": null
+        }
+      ]
+    },
+    {
+      "id": "m29",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "owner_correct": null,
+      "date_correct": true,
+      "change_correct": null,
+      "quote_verified": true,
+      "seconds": 2.039,
+      "raw_items": [
+        {
+          "source_id": 29,
+          "quote": "Please book a ride to Cedar Dental on 2026-11-04 at 13:00.",
+          "title": "Book transport to Cedar Dental",
+          "kind": "transport",
+          "due_at": "2026-11-04T13:00:00+05:00",
+          "owner": null,
+          "location": null,
+          "uncertainty": null,
+          "change": "new",
+          "related_task_id": null
+        }
+      ],
+      "items": [
+        {
+          "title": "Book transport to Cedar Dental",
+          "kind": "transport",
+          "quote": "Please book a ride to Cedar Dental on 2026-11-04 at 13:00.",
+          "due_at": "2026-11-04T13:00:00+05:00",
+          "owner_id": null,
+          "location": "",
+          "uncertainty": "Confirm the model-interpreted date and time against the source.",
+          "change_type": "new",
+          "related_task_id": null
+        }
+      ]
+    },
+    {
+      "id": "m30",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "owner_correct": true,
+      "date_correct": true,
+      "change_correct": null,
+      "quote_verified": true,
+      "seconds": 2.172,
+      "raw_items": [
+        {
+          "source_id": 30,
+          "quote": "Maya will collect the food box from Elm Centre on 2026-11-05 at 11:00.",
+          "title": "Maya picks up food box from Elm Centre",
+          "kind": "pickup",
+          "due_at": "2026-11-05T11:00:00+05:00",
+          "owner": "Maya",
+          "location": "Elm Centre",
+          "uncertainty": null,
+          "change": "new",
+          "related_task_id": null
+        }
+      ],
+      "items": [
+        {
+          "title": "Maya picks up food box from Elm Centre",
+          "kind": "pickup",
+          "quote": "Maya will collect the food box from Elm Centre on 2026-11-05 at 11:00.",
+          "due_at": "2026-11-05T11:00:00+05:00",
+          "owner_id": 2,
+          "location": "Elm Centre",
+          "uncertainty": "Confirm the model-interpreted date and time against the source.",
+          "change_type": "new",
+          "related_task_id": null
+        }
+      ]
+    },
+    {
+      "id": "m31",
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "owner_correct": true,
+      "date_correct": true,
+      "change_correct": null,
+      "quote_verified": true,
+      "seconds": 1.928,
+      "raw_items": [
+        {
+          "source_id": 31,
+          "quote": "Alex will buy groceries on 2026-11-06 at 17:00 at Green Market.",
+          "title": "Alex to buy groceries at Green Market",
+          "kind": "errand",
+          "due_at": "2026-11-06T17:00:00+05:00",
+          "owner": "Alex",
+          "location": "Green Market",
+          "uncertainty": null,
+          "change": "new",
+          "related_task_id": null
+        }
+      ],
+      "items": [
+        {
+          "title": "Alex to buy groceries at Green Market",
+          "kind": "errand",
+          "quote": "Alex will buy groceries on 2026-11-06 at 17:00 at Green Market.",
+          "due_at": "2026-11-06T17:00:00+05:00",
+          "owner_id": 1,
+          "location": "Green Market",
+          "uncertainty": "Confirm the model-interpreted date and time against the source.",
+          "change_type": "new",
+          "related_task_id": null
+        }
+      ]
+    },
+    {
+      "id": "m32",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "owner_correct": null,
+      "date_correct": null,
+      "change_correct": null,
+      "quote_verified": true,
+      "seconds": 0.38,
+      "raw_items": [],
+      "items": []
+    }
+  ]
+}

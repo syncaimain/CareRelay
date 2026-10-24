@@ -1,0 +1,36 @@
+{
+  "model": "ministral-3:14b",
+  "passed": true,
+  "synthetic": true,
+  "ollama_version": "0.40.8",
+  "digest": "4760c35aeb9d9e9c6174c2492562c0b999e80a222804fd96b1915ab72bbcdcf7",
+  "size_bytes": 9082537546,
+  "details": {
+    "parent_model": "",
+    "format": "gguf",
+    "family": "mistral3",
+    "families": [
+      "mistral3"
+    ],
+    "parameter_size": "13.9B",
+    "quantization_level": "Q4_K_M",
+    "context_length": 262144,
+    "embedding_length": 5120,
+    "runner": "ggml"
+  },
+  "license_verified": "Apache 2.0",
+  "seconds": 5.663,
+  "items": [
+    {
+      "title": "Book transport to Oak Clinic",
+      "kind": "transport",
+      "quote": "Alex will book transport to Oak Clinic on 2026-10-26 at 09:00.",
+      "due_at": "2026-10-26T09:00:00+05:00",
+      "owner_id": 1,
+      "location": "Oak Clinic",
+      "uncertainty": "Confirm the model-interpreted date and time against the source.",
+      "change_type": "new",
+      "related_task_id": null
+    }
+  ]
+}

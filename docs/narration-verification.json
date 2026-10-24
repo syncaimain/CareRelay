@@ -1,0 +1,95 @@
+{
+  "model": "hexgrad/Kokoro-82M",
+  "voice": "am_fenrir",
+  "user_direction": "use a non common voice; selection delegated",
+  "sample_rate": 24000,
+  "seconds": 118.8,
+  "device": "cpu",
+  "segments": [
+    {
+      "segment": 1,
+      "start": 0.8,
+      "end": 4.144,
+      "raw_seconds": 3.35,
+      "tempo_factor": 1.0
+    },
+    {
+      "segment": 2,
+      "start": 6.2,
+      "end": 11.039,
+      "raw_seconds": 4.85,
+      "tempo_factor": 1.0
+    },
+    {
+      "segment": 3,
+      "start": 11.3,
+      "end": 16.88,
+      "raw_seconds": 5.575,
+      "tempo_factor": 1.0
+    },
+    {
+      "segment": 4,
+      "start": 17.4,
+      "end": 26.354,
+      "raw_seconds": 8.975,
+      "tempo_factor": 1.0
+    },
+    {
+      "segment": 5,
+      "start": 27.0,
+      "end": 39.304,
+      "raw_seconds": 12.325,
+      "tempo_factor": 1.0
+    },
+    {
+      "segment": 6,
+      "start": 40.8,
+      "end": 46.101,
+      "raw_seconds": 5.3,
+      "tempo_factor": 1.0
+    },
+    {
+      "segment": 7,
+      "start": 47.1,
+      "end": 51.001,
+      "raw_seconds": 3.9,
+      "tempo_factor": 1.0
+    },
+    {
+      "segment": 8,
+      "start": 51.8,
+      "end": 64.529,
+      "raw_seconds": 12.75,
+      "tempo_factor": 1.0
+    },
+    {
+      "segment": 9,
+      "start": 67.2,
+      "end": 72.03,
+      "raw_seconds": 4.925,
+      "tempo_factor": 1.0218
+    },
+    {
+      "segment": 10,
+      "start": 72.5,
+      "end": 76.978,
+      "raw_seconds": 4.475,
+      "tempo_factor": 1.0
+    },
+    {
+      "segment": 11,
+      "start": 77.8,
+      "end": 81.569,
+      "raw_seconds": 3.775,
+      "tempo_factor": 1.0
+    },
+    {
+      "segment": 12,
+      "start": 82.5,
+      "end": 105.904,
+      "raw_seconds": 23.425,
+      "tempo_factor": 1.0
+    }
+  ],
+  "subtitle_timing": "phrase timing proportional within each aligned TTS segment"
+}

@@ -1,0 +1,12 @@
+{
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "mobile": {
+    "width": 390,
+    "height": 844
+  },
+  "horizontalOverflow": false,
+  "pageErrors": []
+}

@@ -1,0 +1,25 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    environment:
+      OLLAMA_URL: http://host.docker.internal:11434
+      OLLAMA_MODEL: ministral-3:14b
+      CARERELAY_DB: /app/data/carerelay.sqlite3
+      CARERELAY_DEMO: "true"
+    volumes:
+      - care-data:/app/data
+    # Share the frontend's network namespace so its API proxy reaches loopback
+    # and demo setup retains the backend's loopback-only restriction.
+    network_mode: service:frontend
+    depends_on:
+      - frontend
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "127.0.0.1:3104:3104"
+volumes:
+  care-data:

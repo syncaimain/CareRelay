@@ -1,0 +1,115 @@
+1
+00:00:00,800 --> 00:00:04,144
+Four relatives want to help. Who has the whole plan?
+
+2
+00:00:06,200 --> 00:00:11,039
+CareRelay gives a fictional family one shared coordination
+workspace.
+
+3
+00:00:11,300 --> 00:00:16,451
+Start with the original messages. The reference date keeps
+local times in
+
+4
+00:00:16,451 --> 00:00:16,880
+context.
+
+5
+00:00:17,400 --> 00:00:23,055
+Ministral Three, fourteen billion parameters, reads the
+source locally through Ollama. The
+
+6
+00:00:23,055 --> 00:00:26,354
+input is synthetic. The inference is real.
+
+7
+00:00:27,000 --> 00:00:32,468
+Each suggestion includes its source quote. A reviewer
+checks the task, date,
+
+8
+00:00:32,468 --> 00:00:37,937
+proposed caregiver, and uncertainty before approving. The
+plan only contains items a
+
+9
+00:00:37,937 --> 00:00:39,304
+person has reviewed.
+
+10
+00:00:40,800 --> 00:00:45,344
+Maya has a work conflict. The return ride has no driver.
+Both
+
+11
+00:00:45,344 --> 00:00:46,101
+stay visible.
+
+12
+00:00:47,100 --> 00:00:51,001
+Robin accepts her pickup. Only she can give that consent.
+
+13
+00:00:51,800 --> 00:00:57,067
+Now the appointment moves. The reviewer selects the
+original item and confirms
+
+14
+00:00:57,067 --> 00:01:02,334
+the new time. CareRelay cancels the old record and keeps
+the replacement.
+
+15
+00:01:02,334 --> 00:01:04,529
+Transport remains a separate decision.
+
+16
+00:01:07,200 --> 00:01:12,030
+The calendar shows the replacement date, with the original
+history preserved.
+
+17
+00:01:12,500 --> 00:01:16,978
+Accepted commitments and open questions stay separate,
+with evidence.
+
+18
+00:01:17,800 --> 00:01:21,569
+Approve before sharing. Nothing is sent automatically.
+
+19
+00:01:22,500 --> 00:01:26,245
+This demonstration ends with five active approved tasks,
+one accepted responsibility, and
+
+20
+00:01:26,245 --> 00:01:29,989
+two source imports. A model suggestion to cancel transport
+was rejected because
+
+21
+00:01:29,989 --> 00:01:33,734
+its quote did not support that change. Exact evidence
+still needs human
+
+22
+00:01:33,734 --> 00:01:37,478
+judgment. This is a local prototype for fictional data,
+not medical advice
+
+23
+00:01:37,478 --> 00:01:41,223
+or a production household service. The payoff is less
+reconstructing the chat,
+
+24
+00:01:41,223 --> 00:01:44,968
+and a clearer place to start the next conversation.
+CareRelay. A little
+
+25
+00:01:44,968 --> 00:01:45,904
+less to carry.

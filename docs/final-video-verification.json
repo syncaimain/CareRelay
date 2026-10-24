@@ -1,0 +1,20 @@
+{
+  "final_video": "demo/assets/video/final_demo.mp4",
+  "voice": "am_fenrir",
+  "model": "hexgrad/Kokoro-82M",
+  "seconds": 108.08,
+  "sample_rate": 24000,
+  "wav_peak": 0.859893798828125,
+  "clipped_samples": 0,
+  "speech_end_seconds": 105.904,
+  "segment_overlap": false,
+  "sha256": "f7b06490343311a0d743548e6371dda740b1adead14b7c16c816cd9519035de2",
+  "size_bytes": 5787858,
+  "full_decode_passed": true,
+  "video_codec": "h264",
+  "audio_codec": "aac",
+  "subtitle_codec": "mov_text",
+  "width": 1920,
+  "height": 1080,
+  "embedded_subtitle_text_matches": true
+}

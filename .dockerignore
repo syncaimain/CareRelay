@@ -1,0 +1,10 @@
+node_modules
+.next
+.venv
+data
+.env
+.git
+.npm-cache
+__pycache__
+*.log
+demo/assets
